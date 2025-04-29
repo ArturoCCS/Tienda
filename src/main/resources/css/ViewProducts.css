@@ -1,0 +1,189 @@
+
+.search-box{
+    -fx-background-color: rgb(253, 253, 253);
+
+    -fx-font-size: 12px;
+
+    -fx-min-height: 37px;
+    -fx-pref-height: 37px;
+    -fx-max-height: 37px;
+    -fx-background-radius: 10;
+}
+
+.search-button{
+    -fx-background-color: #267766;
+    -fx-font-size: 12px;
+
+    -fx-min-height: 27px;
+    -fx-pref-height: 27px;
+    -fx-max-height: 27px;
+    -fx-background-radius: 5;
+    -fx-text-fill: white;
+
+}
+
+
+.search-button:hover{
+    -fx-background-color: #267766;
+
+}
+
+.contenedor-items{
+    -fx-background-color: #fefefe;
+    -fx-background-radius: 10 10 0 0;
+}
+
+.data-item{
+    -fx-background-color: #267766;
+    -fx-background-radius: 30;
+    -fx-text-fill: black;
+
+}
+
+.data-item:hover {
+    -fx-background-color: #267766;
+    -fx-effect: dropshadow(gaussian, #FFFFFF, 10, 0.5, 0, 0);
+}
+
+.selected-item{
+    -fx-background-color: #267766;
+
+}
+
+.figura{
+    -fx-pref-width: 198px;
+    -fx-background-radius: 20;
+    -fx-background-color: #edf6f4;
+}
+
+.selected-page {
+    -fx-min-height: 30px;
+    -fx-pref-height: 30px;
+    -fx-max-height: 30px;
+    -fx-background-color: #267766 !important;
+    -fx-background-radius: 5;
+
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+
+    -fx-padding: 0 10;
+}
+
+.input-page{
+    -fx-background-color: rgba(224, 232, 241, 0.66);
+}
+
+.page {
+    -fx-min-height: 30px;
+    -fx-pref-height: 30px;
+    -fx-max-height: 30px;
+    -fx-background-radius: 5;
+
+    -fx-background-color: transparent;
+
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+
+    -fx-padding: 0 10;
+}
+
+.page:hover {
+    -fx-background-color: #267766;
+    -fx-background-radius: 10;
+
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+
+    -fx-border-radius: 10;
+    -fx-border-color: #267766;
+    -fx-border-width: 1px;
+    -fx-border-style: solid;
+
+    -fx-padding: 0 10;
+}
+
+.ellipsis {
+    -fx-text-fill: gray;
+    -fx-font-size: 14px;
+}
+
+
+.card{
+    -fx-background-color: #f7f7f7;
+}
+
+.nav-icon {
+    -fx-fill: #555;
+}
+
+.nav-label {
+    -fx-text-fill: #555;
+}
+
+.selected-button .label {
+    -fx-fill: #267766;
+    -fx-text-fill: #267766;
+}
+
+.selected-button .nav-icon{
+    -fx-fill: #267766;
+}
+
+
+.selected-button{
+    -fx-background-color: linear-gradient(to left, rgba(255, 255, 255, 0) 97%, #267766 2%, #267766 2%) !important;
+}
+
+
+
+.nav-tab {
+    -fx-font-size: 13px;
+    -fx-padding: 5 10 0 10;
+    -fx-background-color: #267766;
+    -fx-background-radius: 10;
+
+    -fx-border-color: transparent;
+    -fx-border-width: 3px;
+    -fx-border-radius: 12;
+    -fx-cursor: hand;
+    -fx-min-height: 37px;
+    -fx-pref-height: 37px;
+    -fx-max-height: 37px;
+}
+
+.nav-tab .label{
+    -fx-text-fill: white;
+}
+
+.nav-tab .glyph-icon{
+    -fx-fill: white;
+}
+
+.selected{
+    -fx-background-color: #ffffff;
+    -fx-border-color: #36a68e;
+
+}
+.selected .glyph-icon{
+    -fx-fill: #353535;
+}
+
+.selected .label{
+    -fx-text-fill: #353535;
+}
+
+
+.banner{
+    -fx-background-color: linear-gradient(to bottom, rgba(186, 230, 210, 0.6) 20%, rgba(212, 241, 229, 0.2) 90%);
+    -fx-background-radius: 10 10 10 10;
+}
+
+.tooltip {
+    -fx-background-color: rgba(27, 26, 26, 0.95);
+    -fx-text-fill: white;
+    -fx-padding: 8px 12px;
+    -fx-font-size: 13px;
+    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-background-radius: 8px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 8, 0.3, 0, 2);
+}

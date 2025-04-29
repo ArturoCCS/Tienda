@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+           style="-fx-background-color: white;">
+
+    <VBox alignment="CENTER" spacing="20">
+        <Label text="Bienvenido a Apptiendita" style="-fx-font-size: 24px;" />
+        <ProgressIndicator />
+        <Label text="Cargando aplicación..." />
+    </VBox>
+</StackPane>
+

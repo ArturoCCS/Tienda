@@ -1,0 +1,90 @@
+
+.shopping-cart{
+    -fx-background-color: #edf6f4;
+}
+
+.ticket-header {
+    -fx-background-color: white;
+    -fx-background-radius: 20;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 5, 0.0, 0, 2);
+    -fx-border-radius: 20;
+}
+
+.separator-dashed {
+    -fx-font-family: "Courier New", monospace;
+    -fx-font-size: 5px;
+    -fx-text-fill: #888;
+    -fx-alignment: center;
+}
+
+.icon-button {
+    -fx-background-color: #f5f5f5;
+    -fx-background-radius: 50%;
+    -fx-padding: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 2, 0.0, 0, 1);
+}
+
+.icon-button:hover {
+    -fx-background-color: #f5f5f5;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 2, 0.0, 0, 1);
+}
+
+.ticket-title {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+}
+
+.ticket-subtitle {
+    -fx-font-size: 11px;
+    -fx-text-fill: #888;
+}
+
+
+.cost-label {
+    -fx-font-size: 13px;
+    -fx-text-fill: #555;
+}
+
+.cost-value {
+    -fx-font-size: 13px;
+    -fx-text-fill: #555;
+}
+
+.tax-label {
+    -fx-font-size: 12px;
+    -fx-text-fill: #777;
+}
+
+.tax-value {
+    -fx-font-size: 12px;
+    -fx-text-fill: #777;
+}
+
+.total-label {
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #222;
+}
+
+.total-value {
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #222;
+
+}
+
+.confirm-button {
+    -fx-background-color: #36a68e;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-family: "Segoe UI Semibold", "Segoe UI", sans-serif;
+    -fx-font-weight: bold;
+    -fx-background-radius: 20;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 5, 0.0, 0, 2);
+}
+
+.confirm-button:hover {
+    -fx-background-color: #267766;
+}
+

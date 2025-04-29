@@ -1,0 +1,32 @@
+1234567890123, Coca-Cola, Coca-Cola, Refresco de cola, Bebidas, Litros, 1.5, Botella, true, https://example.com/coca-cola.jpg
+2345678901234, Fanta Naranja, Coca-Cola, Refresco de naranja, Bebidas, Litros, 2.0, Botella, true, https://example.com/fanta.jpg
+3456789012345, Pepsi, PepsiCo, Refresco de cola, Bebidas, Litros, 1.5, Botella, true, https://example.com/pepsi.jpg
+4567890123456, Red Bull, Red Bull, Bebida energética, Bebidas, Litros, 0.25, Lata, true, https://example.com/redbull.jpg
+5678901234567, Nestlé Leche, Nestlé, Leche líquida entera, Comestibles, Litros, 1.0, Botella, true, https://example.com/nestle_leche.jpg
+6789012345678, Jugo de Naranja Santa Clara, Santa Clara, Jugo de naranja, Comestibles, Litros, 1.0, Botella, true, https://example.com/jugo_naranja.jpg
+7890123456789, Galletas Oreo, Mondelez, Galletas rellenas de crema, Comestibles, Unidades, 10.0, Caja, true, https://example.com/oreo.jpg
+8901234567890, Cereal Kellogg's Corn Flakes, Kellogg's, Cereal de maíz, Comestibles, Kilogramos, 0.5, Caja, true, https://example.com/cereal.jpg
+9012345678901, Arroz Basmati, Tilda, Arroz largo, Comestibles, Kilogramos, 1.0, Bolsa, true, https://example.com/arroz.jpg
+0123456789012, Papel Higiénico Elite, Kimberly-Clark, Papel higiénico, Higiene, Unidades, 12.0, Paquete, true, https://example.com/papel.jpg
+1122334455667, Aspirina Bayer, Bayer, Analgésico para dolores, Salud, Unidades, 10.0, Caja, true, https://example.com/aspirina.jpg
+2233445566778, Cepillo Colgate, Colgate, Cepillo de dientes, Higiene, Unidades, 1.0, Caja, true, https://example.com/cepillo.jpg
+3344556677889, Pasta Dental Sensodyne, GlaxoSmithKline, Pasta dental para dientes sensibles, Higiene, Unidades, 1.0, Tubo, true, https://example.com/pasta.jpg
+4455667788990, Shampoo Head & Shoulders, Procter & Gamble, Shampoo anticaspa, Higiene, Litros, 0.4, Botella, true, https://example.com/shampoo.jpg
+5566778899001, Detergente Ariel, Procter & Gamble, Detergente en polvo, Hogar, Kilogramos, 1.0, Caja, true, https://example.com/detergente.jpg
+6677889900112, Lavavajillas Dawn, Procter & Gamble, Lavavajillas líquido, Hogar, Litros, 0.5, Botella, true, https://example.com/lavavajillas.jpg
+7788990011223, Cerveza Corona, Grupo Modelo, Cerveza tipo lager, Bebidas, Litros, 0.33, Botella, true, https://example.com/cerveza.jpg
+8899001122334, Vino Tinto Montes Alpha, Montes, Vino tinto chileno, Bebidas, Litros, 0.75, Botella, true, https://example.com/vino.jpg
+9900112233445, Aceite de Oliva Borges, Borges, Aceite de oliva extra virgen, Comestibles, Litros, 1.0, Botella, true, https://example.com/aceite.jpg
+1001122334556, Salchichón Oscar Mayer, Oscar Mayer, Embutido de cerdo, Comestibles, Kilogramos, 0.5, Paquete, true, https://example.com/salchichon.jpg
+2102233445667, Manteca de Cerdo Manteca, Manteca, Grasa de cerdo, Comestibles, Kilogramos, 1.0, Paquete, true, https://example.com/manteca.jpg
+3203344556778, Chocolate Lindt, Lindt, Chocolate suizo de alta calidad, Comestibles, Unidades, 100.0, Caja, true, https://example.com/chocolate.jpg
+4304455667889, Café Nescafé, Nestlé, Café instantáneo, Comestibles, Kilogramos, 0.2, Bolsa, true, https://example.com/cafe.jpg
+5405566778990, Té Lipton, Lipton, Té negro, Comestibles, Unidades, 20.0, Caja, true, https://example.com/te.jpg
+6506677889001, Avena Quaker, Quaker, Avena instantánea, Comestibles, Kilogramos, 0.5, Paquete, true, https://example.com/avena.jpg
+7607788990112, Margarina Flora, Flora, Margarina vegetal, Comestibles, Kilogramos, 1.0, Pote, true, https://example.com/margarina.jpg
+8708899001223, Soda Club, Soda Club, Refresco de soda, Bebidas, Litros, 1.0, Botella, true, https://example.com/soda.jpg
+9809900112334, Chicles Trident, Mondelez, Chicles sin azúcar, Comestibles, Unidades, 15.0, Caja, true, https://example.com/chicles.jpg
+1110012233445, Tetra Pak Leche, Tetra Pak, Leche UHT, Comestibles, Litros, 1.0, Caja, true, https://example.com/tetra_leche.jpg
+2111123344556, Papas Pringles, Kellogg's, Papas fritas en tubo, Comestibles, Unidades, 200.0, Tubo, true, https://example.com/pringles.jpg
+3112234455667, Ketchup Heinz, Heinz, Ketchup tradicional, Comestibles, Kilogramos, 0.5, Botella, true, https://example.com/ketchup.jpg
+4113345566778, Mostaza Amora, Amora, Mostaza en tarro, Comestibles, Kilogramos, 0.3, Tarro, true, https://example.com/mostaza.jp
