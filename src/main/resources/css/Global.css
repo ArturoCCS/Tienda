@@ -30,13 +30,13 @@
 
 }
 .close-button:hover{
-    -fx-background-color: rgba(255, 56, 56, 0.87) !important;
+    -fx-background-color: rgba(246, 38, 38, 0.59) !important;
 }
 .separador{
     -fx-background-color: #edf6f4;
 }
 .jfx-decorator-buttons-container {
-    -fx-background-color: #fdfdfd;
+    -fx-background-color: #f3f3f5;
     -fx-pref-height: 35px;
     -fx-min-height: 35px;
     -fx-background-radius: 10 10 0 0;

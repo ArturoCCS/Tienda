@@ -11,9 +11,7 @@
 }
 
 .separator-dashed {
-    -fx-font-family: "Courier New", monospace;
-    -fx-font-size: 5px;
-    -fx-text-fill: #888;
+    -fx-text-fill: rgba(67, 66, 66, 0.49);
     -fx-alignment: center;
 }
 

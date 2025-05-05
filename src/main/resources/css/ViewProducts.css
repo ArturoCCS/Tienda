@@ -29,7 +29,7 @@
 }
 
 .contenedor-items{
-    -fx-background-color: #fefefe;
+    -fx-background-color: #f3f3f5;
     -fx-background-radius: 10 10 0 0;
 }
 
@@ -108,8 +108,14 @@
 }
 
 
-.card{
-    -fx-background-color: #f7f7f7;
+.card {
+    -fx-background-color: #fdfdfd;
+    -fx-border-color: #fdfdfd;
+    -fx-border-width: 1;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-effect: dropshadow(gaussian, rgba(163, 163, 163, 0.23), 20, 0.2, 0, 4);
+
 }
 
 .nav-icon {
@@ -138,7 +144,8 @@
 
 .nav-tab {
     -fx-font-size: 13px;
-    -fx-padding: 5 10 0 10;
+
+    -fx-padding: 10 10 10 10;
     -fx-background-color: #267766;
     -fx-background-radius: 10;
 
@@ -174,7 +181,7 @@
 
 
 .banner{
-    -fx-background-color: linear-gradient(to bottom, rgba(186, 230, 210, 0.6) 20%, rgba(212, 241, 229, 0.2) 90%);
+    -fx-background-color: linear-gradient(to bottom, rgba(182, 225, 206, 0.71) 20%, rgba(212, 241, 229, 0.2) 90%);
     -fx-background-radius: 10 10 10 10;
 }
 
