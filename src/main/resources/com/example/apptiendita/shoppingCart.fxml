@@ -11,11 +11,12 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <VBox prefWidth="300.0" styleClass="shopping-cart" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.apptiendita.ShoppingCartController">
 
    <children>
-      <HBox alignment="CENTER_LEFT" prefHeight="70" spacing="10" styleClass="ticket-header">
+      <HBox alignment="CENTER_LEFT" prefHeight="70" spacing="10">
          <children>
             <Button styleClass="icon-button">
                <graphic>
@@ -45,7 +46,6 @@
             <Insets bottom="5.0" left="5.0" right="15.0" top="5.0" />
          </VBox.margin>
       </HBox>
-      <Label styleClass="separator-dashed" text="- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -" HBox.hgrow="ALWAYS" />
 
       <ScrollPane styleClass="transparent" VBox.vgrow="ALWAYS">
          <content>
@@ -65,7 +65,6 @@
             </VBox>
          </content>
       </ScrollPane>
-      <Label styleClass="separator-dashed" text="- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -" />
 
       <HBox prefHeight="50.0">
          <children>
@@ -105,7 +104,10 @@
             <Insets top="10.0" />
          </padding>
       </HBox>
-      <Label styleClass="separator-dashed" text="- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -" />
+      <Label styleClass="separator-dashed" text=" - - - - - - - - - - - - - - -">
+         <font>
+            <Font size="29.0" />
+         </font></Label>
 
       <HBox prefHeight="50.0">
          <children>

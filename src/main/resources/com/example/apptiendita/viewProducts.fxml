@@ -8,16 +8,19 @@
 <?import javafx.scene.control.Pagination?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox fx:id="homeItems" stylesheets="@../../../css/ViewProducts.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="homeItems" prefWidth="1000.0" stylesheets="@../../../css/ViewProducts.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <HBox alignment="TOP_RIGHT">
             <children>
@@ -25,16 +28,19 @@
                     <children>
                         <FontAwesomeIconView glyphName="SEARCH" size="18">
                             <HBox.margin>
-                                <Insets left="10.0" />
+                                <Insets bottom="2.0" left="10.0" />
                             </HBox.margin>
                         </FontAwesomeIconView>
                         <TextField fx:id="txtSearch" minWidth="100.0" prefHeight="30.0" promptText="Busca tu producto" styleClass="transparent" HBox.hgrow="ALWAYS">
                             <font>
                                 <Font size="13.0" />
                             </font>
+                     <HBox.margin>
+                        <Insets left="10.0" right="10.0" />
+                     </HBox.margin>
                         </TextField>
 
-                        <Button minWidth="80.0" mnemonicParsing="false" onAction="#search" prefWidth="100.0" styleClass="search-button" text="Buscar" textFill="WHITE">
+                        <Button minWidth="50.0" mnemonicParsing="false" onAction="#search" prefWidth="70.0" styleClass="search-button" text="Buscar" textFill="WHITE">
                      <HBox.margin>
                         <Insets bottom="1.0" right="5.0" />
                      </HBox.margin></Button>
@@ -64,31 +70,40 @@
                         <ScrollPane fx:id="scroll" fitToWidth="true" hbarPolicy="NEVER" styleClass="transparent" vbarPolicy="AS_NEEDED" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
                             <content>
                                 <VBox fx:id="container" alignment="TOP_LEFT" fillWidth="true">
-                           <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="200.0" prefWidth="3000.0" styleClass="banner">
-                               <children>
-                                 <VBox prefHeight="50.0">
+                                    <VBox alignment="CENTER_LEFT" nodeOrientation="LEFT_TO_RIGHT" styleClass="banner" VBox.vgrow="ALWAYS">
+                                        <children>
+                                 <StackPane prefHeight="150.0" prefWidth="200.0">
                                     <children>
-                                       <Label prefHeight="48.0" prefWidth="200.0" text="Bienvenido" textFill="#1f3c45">
-                                          <VBox.margin>
-                                             <Insets left="10.0" />
-                                          </VBox.margin>
-                                          <font>
-                                             <Font size="35.0" />
-                                          </font>
-                                       </Label>
-                                       <Label text="Mensaje Inspirador" textFill="#171210b2">
-                                          <VBox.margin>
-                                             <Insets left="10.0" />
-                                          </VBox.margin>
-                                          <font>
-                                             <Font size="15.0" />
-                                          </font>
-                                       </Label>
+                                       <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" scaleX="2.0" scaleY="2.0" scaleZ="0.0" translateX="285.0" translateY="20.0">
+                                          <image>
+                                             <Image url="@../../../img/ImgBanner.png" />
+                                          </image>
+                                       </ImageView>
+                                       <VBox>
+                                          <children>
+                                             <Label styleClass="banner-title" text="BIENVENIDO" textFill="WHITE" viewOrder="0.0">
+                                                <VBox.margin>
+                                                   <Insets />
+                                                </VBox.margin>
+                                                <font>
+                                                   <Font name="Berlin Sans FB Demi Bold" size="65.0" />
+                                                </font>
+                                                <padding>
+                                                   <Insets top="10.0" />
+                                                </padding>
+                                             </Label>
+                                             <Label text="“El éxito se construye una venta a la vez”" textFill="#3a605ab2">
+                                                <VBox.margin>
+                                                   <Insets />
+                                                </VBox.margin>
+                                                <font>
+                                                   <Font size="23.0" />
+                                                </font>
+                                             </Label>
+                                          </children>
+                                       </VBox>
                                     </children>
-                                    <VBox.margin>
-                                       <Insets top="10.0" />
-                                    </VBox.margin>
-                                 </VBox>
+                                 </StackPane>
                                  <HBox alignment="BOTTOM_LEFT" spacing="20.0">
                                     <children>
                                          <Button fx:id="inventarioTab" mnemonicParsing="false" onAction="#handleInventario" styleClass="nav-tab">
@@ -105,7 +120,7 @@
                                                  </HBox>
                                              </graphic>
                                           <HBox.margin>
-                                             <Insets left="5.0" />
+                                             <Insets />
                                           </HBox.margin>
                                          </Button>
                                          <Button fx:id="ventaTab" mnemonicParsing="false" onAction="#handleModoVenta" styleClass="nav-tab">
@@ -127,9 +142,9 @@
                                          </Button>
                                         <Region HBox.hgrow="ALWAYS" />
 
-                                        <Button fx:id="agregarTab" mnemonicParsing="false" onAction="#handleAgregar" styleClass="nav-tab">
+                                                    <Button fx:id="agregarTab" mnemonicParsing="false" onAction="#handleAgregar" styleClass="nav-tab">
 
-                                            <graphic>
+                                                        <graphic>
                                                  <HBox>
                                                      <children>
                                                          <FontAwesomeIconView glyphName="PLUS">
@@ -146,7 +161,7 @@
                                          </Button>
                                     </children>
                                     <padding>
-                                       <Insets bottom="30.0" top="20.0" />
+                                       <Insets bottom="10.0" top="10.0" />
                                     </padding>
                                  </HBox>
                                </children>
@@ -154,7 +169,7 @@
                                  <Insets />
                               </opaqueInsets>
                               <padding>
-                                 <Insets left="10.0" />
+                                 <Insets bottom="5.0" left="20.0" right="10.0" top="5.0" />
                               </padding>
                               <VBox.margin>
                                  <Insets bottom="10.0" left="10.0" right="20.0" top="10.0" />
