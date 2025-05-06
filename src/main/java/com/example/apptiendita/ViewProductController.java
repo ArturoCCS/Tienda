@@ -1,30 +1,41 @@
 package com.example.apptiendita;
 
+import animatefx.animation.Pulse;
+import animatefx.animation.SlideInLeft;
+import animatefx.animation.SlideOutRight;
 import com.example.interfaces.Displayable;
 import com.example.interfaces.Keyable;
 import com.example.model.Product;
 import com.example.model.ViewOperable;
 import com.example.vista.PanelCapturaProductos;
 import com.example.vista.PanelEditarProducto;
+import javafx.animation.*;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.CacheHint;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.*;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
+import static com.example.utility.AnimationHelper.applyHoverAnimation;
 import static com.example.utility.FormUtility.message;
 
 public class ViewProductController extends ViewOperable {
@@ -38,19 +49,37 @@ public class ViewProductController extends ViewOperable {
     private Button inventarioTab;
 
     @FXML
+    private ImageView imgBanner;
+    @FXML
     private Button ventaTab;
 
+    @FXML private Rectangle bannerClip;
+    @FXML private VBox banner;
     @FXML
     private TextField txtSearch;
 
     private ShoppingCartController shoppingCartController;
 
+    private AnchorPane anchorPaneVenta;
+
+    private VBox shoppingCart;
+
+    public void setAnchorPaneVenta(AnchorPane anchorPaneVenta) {
+        this.anchorPaneVenta = anchorPaneVenta;
+    }
+
     @FXML
-    protected void initialize() {
+    private void initialize() {
         //Establecemos el modo por defecto "Inventario"
         setModo("Inventario");
-        setupPagination(catalog);
+        setDataList(getCatalog());
         super.setupScrollListener();
+
+
+        bannerClip.widthProperty().bind(banner.widthProperty());
+        bannerClip.heightProperty().bind(banner.heightProperty());
+
+        setupPagination(getCatalog());
 
         getContainer().setCache(true);
         getContainer().setCacheHint(CacheHint.SPEED);
@@ -69,9 +98,10 @@ public class ViewProductController extends ViewOperable {
         List<Button> tabs = List.of(inventarioTab, ventaTab, agregarTab);
 
         for (Button tab : tabs) {
+            applyHoverAnimation(tab);
             tab.getStyleClass().remove("button");
             if (tab.equals(agregarTab)) {
-                Tooltip tooltip = new Tooltip("Agregar nuevo producto al editar");
+                Tooltip tooltip = new Tooltip("Agregar nuevo producto");
                 tooltip.setShowDelay(Duration.millis(100));
                 tooltip.getStyleClass().add("tooltip");
                 Tooltip.install(agregarTab, tooltip);
@@ -93,14 +123,14 @@ public class ViewProductController extends ViewOperable {
     private void search(ActionEvent event) {
         String query = txtSearch.getText().toLowerCase().trim();
 
-        if (super.catalogFiltered == null){
-            if (super.catalog == null || catalog.isEmpty()) {
+        if (super.getCatalogFiltered() == null){
+            if (super.getCatalog() == null || super.getCatalog().isEmpty()) {
                 return;
             }
-            catalogFiltered = catalog;
+            setCatalogFiltered(getCatalog());
         }
 
-        List<? extends Keyable> filteredData = catalogFiltered.stream()
+        List<? extends Keyable> filteredData = getCatalogFiltered().stream()
                 .filter(product -> product instanceof Product)
                 .map(product -> (Product) product)
                 .filter(product -> {
@@ -112,7 +142,8 @@ public class ViewProductController extends ViewOperable {
         if (filteredData.isEmpty()) {
             message("Sin resultados","No se encontraron productos que coincidan con '" + query + "'.");
         } else {
-            resetGrid(null);
+            setLastPageIndex(-1);
+            setCatalogFiltered(filteredData);
             setupPagination(filteredData);
         }
 
@@ -124,74 +155,137 @@ public class ViewProductController extends ViewOperable {
     @SuppressWarnings("unchecked")
     @Override
     public void insertAction(AnchorPane anchorPane, Displayable data) {
-        if (getModo().equals("Inventario")) {
-            if (data instanceof Product producto && catalog != null) {
-                anchorPane.setOnMouseClicked(event -> {
-                    new PanelEditarProducto(producto, (List<Product>) catalog, this).mostrarVentana();
-                });
+        applyHoverAnimation(anchorPane);
+        anchorPane.setOnMousePressed(e -> {
+            anchorPane.setUserData(new double[]{e.getSceneX(), e.getSceneY()});
+        });
+
+        anchorPane.setOnMouseReleased(e -> {
+            double[] start = (double[]) anchorPane.getUserData();
+            double dx = Math.abs(e.getSceneX() - start[0]);
+            double dy = Math.abs(e.getSceneY() - start[1]);
+
+            double movementThreshold = 10;
+
+            if (dx < movementThreshold && dy < movementThreshold) {
+
+                if (getModo().equals("Inventario") && data instanceof Product producto) {
+                    new PanelEditarProducto(producto, (List<Product>) getCatalog(), this).mostrarVentana();
+                } else if (getModo().equals("Venta") && data instanceof Product) {
+                    shoppingCartController.modoVenta(data);
+                }
             }
-        } else if (getModo().equals("Venta")) {
-            if (shoppingCartController != null && data instanceof Product) {
-                anchorPane.setOnMouseClicked(event -> shoppingCartController.modoVenta(data));
-            }
-        }
+        });
+
     }
 
 
-
-
-
-    @FXML
-    private void handleInventario(ActionEvent event) {
-
-        this.setModo("Inventario");
-
-        agregarTab.setVisible(true);
-        this.resetGrid(null);
-        this.setupPagination(catalog);
-        getAnchorPaneVenta().getChildren().clear();
-    }
 
     @FXML
     private void handleModoVenta(ActionEvent event) throws IOException {
 
-        this.setModo("Venta");
-
-        agregarTab.setVisible(false);
-        String query = "Bebidas".toLowerCase().trim();
-        if (catalog == null || catalog.isEmpty()) {
+        if(getModo().equals("Venta"))
             return;
-        }
 
-        List<Product> filteredData = catalog.stream()
+        getGrid().setDisable(true);
+        agregarTab.setVisible(false);
+        AnchorPane anchorPaneVenta = this.anchorPaneVenta;
+        anchorPaneVenta.setOpacity(0);
+        anchorPaneVenta.setPrefWidth(0);
+
+        double targetWidth = 300;
+
+        FXMLLoader loader = new FXMLLoader(ViewProductController.class.getResource("shoppingCart.fxml"));
+        shoppingCart = loader.load();
+        shoppingCartController = loader.getController();
+
+        AnchorPane.setTopAnchor(shoppingCart, 0.0);
+        AnchorPane.setBottomAnchor(shoppingCart, 0.0);
+        AnchorPane.setRightAnchor(shoppingCart, -200.0);
+
+        anchorPaneVenta.getChildren().setAll(shoppingCart);
+
+        Timeline timeline = new Timeline(
+                new KeyFrame(Duration.ZERO,
+                        new KeyValue(anchorPaneVenta.prefWidthProperty(), 0),
+                        new KeyValue(anchorPaneVenta.opacityProperty(), 0)
+
+                ),
+                new KeyFrame(Duration.seconds(0.5),
+                        new KeyValue(anchorPaneVenta.prefWidthProperty(), targetWidth, Interpolator.EASE_BOTH),
+                        new KeyValue(anchorPaneVenta.opacityProperty(), 1, Interpolator.EASE_BOTH)
+                )
+        );
+        timeline.setOnFinished(e -> {
+            AnchorPane.setRightAnchor(shoppingCart, 0.0);
+            setModo("Venta");
+
+        });
+
+        String query = "cola";
+
+
+        List<? extends Keyable> filteredData = getCatalog().stream()
                 .filter(product -> product instanceof Product)
                 .map(product -> (Product) product)
-                .filter(product ->
-                        product.getCategoria().toLowerCase().contains(query))
-                .collect(Collectors.toList());
+                .filter(product -> {
+                    return product.getNombre().toLowerCase().contains(query) ||
+                            product.getDescripcion().toLowerCase().contains(query) ||
+                            product.getCategoria().toLowerCase().contains(query);
+                }).collect(Collectors.toList());
 
         if (filteredData.isEmpty()) {
-            message("Sin resultados", "No se encontraron productos que coincidan con '" + query + "'.");
+            message("Sin resultados","No se encontraron productos que coincidan con '" + query + "'.");
         } else {
-
-            FXMLLoader loader = new FXMLLoader(ViewProductController.class.getResource("shoppingCart.fxml"));
-
-            VBox shoppingCart = loader.load();
-
-            shoppingCartController = loader.getController();
-
-            this.resetGrid(filteredData);
-            this.setupPagination(filteredData);
-            getAnchorPaneVenta().getChildren().setAll(shoppingCart);
+            setCatalogFiltered(filteredData);
+            setupPagination(filteredData);
         }
 
+        timeline.play();
+
     }
+
+
+    @FXML
+    private void handleInventario(ActionEvent event) {
+        if(getModo().equals("Inventario"))
+            return;
+
+        AnchorPane anchorPaneVenta = this.anchorPaneVenta;
+        double currentWidth = anchorPaneVenta.getWidth();
+
+        AnchorPane.setRightAnchor(shoppingCart, -200.0);
+
+        Timeline timeline = new Timeline(
+                new KeyFrame(Duration.ZERO,
+                        new KeyValue(anchorPaneVenta.prefWidthProperty(), currentWidth),
+                        new KeyValue(anchorPaneVenta.opacityProperty(), 1)
+                ),
+                new KeyFrame(Duration.seconds(.4),
+                        new KeyValue(anchorPaneVenta.prefWidthProperty(), 0, Interpolator.EASE_BOTH),
+                        new KeyValue(anchorPaneVenta.opacityProperty(), 0, Interpolator.EASE_BOTH)
+                )
+        );
+
+        timeline.setOnFinished(e -> {
+            agregarTab.setVisible(true);
+            anchorPaneVenta.getChildren().clear();
+        });
+
+        timeline.play();
+
+        setCatalogFiltered(getCatalog());
+        setupPagination(getCatalog());
+        setModo("Inventario");
+    }
+
+
     @FXML
     private void handleAgregar(ActionEvent event){
         Stage stageCaptura = new Stage();
         stageCaptura.initModality(javafx.stage.Modality.APPLICATION_MODAL);
         @SuppressWarnings("unchecked")
-        PanelCapturaProductos panelCaptura = new PanelCapturaProductos((List<Product>) catalog, this);
+        PanelCapturaProductos panelCaptura = new PanelCapturaProductos((List<Product>) getCatalog(), this);
         panelCaptura.start(stageCaptura);
     }
 }
