@@ -3,6 +3,8 @@ module com.example.apptiendita {
     requires de.jensd.fx.glyphs.fontawesome;
     requires javafx.controls;
     requires com.jfoenix;
+    requires AnimateFX;
+    requires eu.iamgio.animated;
 
 
     opens com.example.apptiendita to javafx.fxml, javafx.base;

@@ -5,7 +5,7 @@ import com.example.interfaces.Operable;
 import com.example.model.Container;
 import com.example.model.Product;
 import com.example.utility.JFXDecorator;
-import javafx.animation.FadeTransition;
+import javafx.animation.*;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -13,6 +13,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -43,6 +44,7 @@ public class MainApplication extends Application {
 
         splashStage.initStyle(StageStyle.UNDECORATED);
         splashStage.setScene(splashScene);
+        splashStage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResource("/img/Logo.png")).toExternalForm()));
         splashStage.show();
 
         new Thread(() -> {
@@ -58,11 +60,10 @@ public class MainApplication extends Application {
                 Parent mainRoot = fxmlLoader.load();
 
                 Platform.runLater(() -> {
-                    FadeTransition fadeOut = new FadeTransition(Duration.seconds(0), splashRoot);
-                    fadeOut.setFromValue(1);
-                    fadeOut.setToValue(0);
-                    fadeOut.setOnFinished(ev -> {
 
+                    ParallelTransition splashTransition = getParallelTransition(splashRoot);
+
+                    splashTransition.setOnFinished(ev -> {
                         controller.oyenteCatalogo(new ActionEvent());
 
                         Stage mainStage = new Stage();
@@ -76,6 +77,25 @@ public class MainApplication extends Application {
 
 
                         JFXDecorator decorator = new JFXDecorator(mainStage, mainRoot, true, true, true, catalogs);
+
+
+                        decorator.setScaleX(0.9);
+                        decorator.setScaleY(0.9);
+                        decorator.setOpacity(0);
+
+                        Timeline timeline = new Timeline(
+                                new KeyFrame(Duration.ZERO,
+                                        new KeyValue(decorator.scaleXProperty(), 0.9),
+                                        new KeyValue(decorator.scaleYProperty(), 0.9),
+                                        new KeyValue(decorator.opacityProperty(), 0)
+                                ),
+                                new KeyFrame(Duration.seconds(1.6),
+                                        new KeyValue(decorator.scaleXProperty(), 1),
+                                        new KeyValue(decorator.scaleYProperty(), 1),
+                                        new KeyValue(decorator.opacityProperty(), 1)
+                                )
+                        );
+                        timeline.play();
 
                         customGraphic.setTranslateY(15);
                         decorator.setGraphic(customGraphic);
@@ -95,17 +115,38 @@ public class MainApplication extends Application {
                         mainStage.setHeight(screenHeight);
                         mainStage.setMinWidth(900);
                         mainStage.setMinHeight(400);
+                        mainStage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResource("/img/Logo.png")).toExternalForm()));
+
+                        mainStage.setTitle("Tiendita");
+                        decorator.setTitle("");
                         mainStage.show();
 
                         splashStage.close();
                     });
-                    fadeOut.play();
+                    splashTransition.play();
+
+
+
                 });
 
             } catch (InterruptedException | IOException e) {
                 Platform.runLater(() -> message("Error", "Ocurrió un error durante la carga." + e.getMessage()));
             }
         }).start();
+    }
+
+    private static ParallelTransition getParallelTransition(Parent splashRoot) {
+        FadeTransition fadeOut = new FadeTransition(Duration.seconds(1.5), splashRoot);
+        fadeOut.setFromValue(1);
+        fadeOut.setToValue(0);
+
+        ScaleTransition scaleOut = new ScaleTransition(Duration.seconds(1), splashRoot);
+        scaleOut.setFromX(1);
+        scaleOut.setFromY(1);
+        scaleOut.setToX(1.1);
+        scaleOut.setToY(1.1);
+
+        return new ParallelTransition(fadeOut, scaleOut);
     }
 
     private Node loadFXML(FXMLLoader loader) {
