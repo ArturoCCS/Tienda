@@ -183,7 +183,7 @@ public class PanelCapturaProductos extends Application {
 
                     catalogo.add(product);
                     message("Alerta", "Producto agregado con exito, el editar se a actualizada" );
-                    PRODUCT_CONTROLLER.resetGrid(null);
+                    PRODUCT_CONTROLLER.setCatalogFiltered(catalogo);
                     PRODUCT_CONTROLLER.setupPagination(catalogo);
                 }
             }else {

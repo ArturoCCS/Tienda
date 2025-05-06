@@ -89,7 +89,9 @@ public class PanelEditarProducto {
             producto.setImagenUrl(imagenUrlField.getText());
 
             message("Confirmación", "Producto actualizado correctamente");
-            PRODUCT_CONTROLLER.resetGrid(null);
+
+            PRODUCT_CONTROLLER.setLastPageIndex(-1);
+            PRODUCT_CONTROLLER.setCatalogFiltered(catalogo);
             PRODUCT_CONTROLLER.setupPagination(catalogo);
             stage.close();
         });
@@ -98,7 +100,8 @@ public class PanelEditarProducto {
         eliminarButton.setOnAction(e -> {
             if (catalogo.remove(producto)) {
                 message("Confirmación", "Producto eliminado correctamente");
-                PRODUCT_CONTROLLER.resetGrid(null);
+                PRODUCT_CONTROLLER.setLastPageIndex(-1);
+                PRODUCT_CONTROLLER.setCatalogFiltered(catalogo);
                 PRODUCT_CONTROLLER.setupPagination(catalogo);
                 stage.close();
             } else {
