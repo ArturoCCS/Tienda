@@ -181,7 +181,10 @@
 
 
 .banner{
-    -fx-background-color: linear-gradient(to bottom, rgba(182, 225, 206, 0.71) 20%, rgba(212, 241, 229, 0.2) 90%);
+    /*-fx-background-color: rgba(21, 66, 24, 0.84);*/
+
+    -fx-background-color: linear-gradient(to bottom, rgba(186, 230, 210, 0.6) 20%, rgba(212, 241, 229, 0.2) 90%);
+
     -fx-background-radius: 10 10 10 10;
 }
 

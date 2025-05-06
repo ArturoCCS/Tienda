@@ -3,16 +3,18 @@ package com.example.model;
 import com.example.apptiendita.CardController;
 import com.example.interfaces.Displayable;
 import com.example.interfaces.Keyable;
+import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.CacheHint;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.util.List;
-
 import static com.example.utility.FormUtility.message;
 
 
@@ -35,58 +37,49 @@ public abstract class ViewOperable {
 
     private String modo;
 
-    private AnchorPane anchorPaneVenta;
-
     private static final int ITEMS_PER_PAGE = 20;
-    private static final double CELL_WIDTH = 300;
+    private static final double CELL_WIDTH = 320;
 
     private int lastPageIndex = -1;
     private int lastColumnCount = -1;
-    protected List<? extends Keyable> catalog;
-    protected List<? extends Keyable> catalogFiltered;
-
+    private List<? extends Keyable> catalog;
+    private List<? extends Keyable> catalogFiltered;
     private int columnCount = 1;
 
-    private CardController cardController;
+    public int getLastPageIndex(){
+        return lastPageIndex;
+    }
+
+    public void setLastPageIndex(int lastPageIndex) {
+        this.lastPageIndex = lastPageIndex;
+    }
+
+    public List<? extends Keyable> getCatalog() {
+        return catalog;
+    }
+
+    public void setCatalog(List<? extends Keyable> catalog) {
+        this.catalog = catalog;
+    }
+
+    public List<? extends Keyable> getCatalogFiltered() {
+        return catalogFiltered;
+    }
+
+    public void setCatalogFiltered(List<? extends Keyable> catalogFiltered) {
+        this.catalogFiltered = catalogFiltered;
+    }
 
     public VBox getContainer() {
         return container;
-    }
-
-    public void setContainer(VBox container) {
-        this.container = container;
     }
 
     public GridPane getGrid() {
         return grid;
     }
 
-    public void setGrid(GridPane grid) {
-        this.grid = grid;
-    }
-
     public ScrollPane getScroll() {
         return scroll;
-    }
-
-    public void setScroll(ScrollPane scroll) {
-        this.scroll = scroll;
-    }
-
-    public AnchorPane getAnchorPaneVenta() {
-        return anchorPaneVenta;
-    }
-
-    public void setAnchorPaneVenta(AnchorPane anchorPaneVenta) {
-        this.anchorPaneVenta = anchorPaneVenta;
-    }
-
-    public CardController getCardController() {
-        return cardController;
-    }
-
-    public void setCardController(CardController cardController) {
-        this.cardController = cardController;
     }
 
     public String getModo() {
@@ -95,6 +88,10 @@ public abstract class ViewOperable {
 
     public void setModo(String modo) {
         this.modo = modo;
+    }
+
+    public void setDataList(List<? extends Keyable> catalog) {
+        this.catalog = catalog;
     }
 
     public void setupPagination(List<? extends Keyable> dataListToShow) {
@@ -113,16 +110,6 @@ public abstract class ViewOperable {
     }
 
 
-
-    public void setDataList(List<? extends Keyable> catalog) {
-        this.catalog = catalog;
-    }
-
-    public void resetGrid(List<? extends Keyable> catalogFiltered){
-        this.lastPageIndex = -1;
-        this.catalogFiltered = catalogFiltered;
-    }
-
     protected void setupScrollListener() {
         scroll.widthProperty().addListener((obs, oldVal, newVal) -> {
             columnCount = Math.max((int) (newVal.doubleValue() / CELL_WIDTH), 1);
@@ -130,6 +117,7 @@ public abstract class ViewOperable {
         });
         scroll.setFitToWidth(true);
     }
+
 
     private int calculateTotalPages(int totalItems) {
         return (int) Math.ceil((double) totalItems / ITEMS_PER_PAGE);
@@ -229,19 +217,36 @@ public abstract class ViewOperable {
 
     private void createPage(double width, int pageIndex, List<? extends Keyable> dataListToShow) {
         int columnCount = Math.max((int) (width / CELL_WIDTH), 1);
+        if (pageIndex == lastPageIndex && columnCount == lastColumnCount)
+            return;
 
-        if (pageIndex == lastPageIndex && columnCount == lastColumnCount) return;
         lastPageIndex = pageIndex;
         lastColumnCount = columnCount;
 
-        grid.getChildren().clear();
+        FadeTransition fadeOut = new FadeTransition(Duration.millis(100), grid);
+        fadeOut.setFromValue(1.0);
+        fadeOut.setToValue(0.0);
+        fadeOut.setOnFinished(e -> {
+            grid.getChildren().clear();
+            loadGridData(width, pageIndex, dataListToShow, columnCount);
 
+            FadeTransition fadeIn = new FadeTransition(Duration.millis(100), grid);
+            fadeIn.setFromValue(0.0);
+            fadeIn.setToValue(1.0);
+            fadeIn.setOnFinished(ev -> grid.setDisable(false));
+            fadeIn.play();
+        });
+
+        fadeOut.play();
+    }
+
+
+    private void loadGridData(double width, int pageIndex, List<? extends Keyable> dataListToShow, int columnCount) {
         if (grid.getColumnConstraints().size() != columnCount) {
             grid.getColumnConstraints().clear();
             for (int i = 0; i < columnCount; i++) {
                 ColumnConstraints colConst = new ColumnConstraints();
                 colConst.setPercentWidth(100.0 / columnCount);
-                colConst.setFillWidth(true);
                 grid.getColumnConstraints().add(colConst);
             }
         }
@@ -251,7 +256,7 @@ public abstract class ViewOperable {
         int start = pageIndex * ITEMS_PER_PAGE;
         int end = Math.min(start + ITEMS_PER_PAGE, dataListToShow.size());
         int column = 0;
-        int row = 2;
+        int row = 1;
 
         for (int i = start; i < end; i++) {
             addDataToGrid(dataListToShow.get(i), column, row, cellWidth);
@@ -260,15 +265,17 @@ public abstract class ViewOperable {
                 row++;
             }
         }
-        centerGrid();
 
+        centerGrid();
     }
+
 
     private void addDataToGrid(Keyable data, int column, int row, double cellWidth) {
         try {
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("card.fxml"));
             AnchorPane anchorPane = loader.load();
-            cardController = loader.getController();
+            CardController cardController = loader.getController();
 
             if (data instanceof Displayable) {
                 cardController.setProducto((Displayable) data);
@@ -278,26 +285,24 @@ public abstract class ViewOperable {
                 }
             }
 
-
-
             anchorPane.setPrefWidth(cellWidth - 20);
             anchorPane.setMaxWidth(Double.MAX_VALUE);
-            anchorPane.getStyleClass().add("responsive-card");
-
+            anchorPane.setCache(true);
+            anchorPane.setCacheHint(CacheHint.QUALITY);
             anchorPane.getProperties().put("controller", cardController);
             grid.add(anchorPane, column, row);
-            GridPane.setMargin(anchorPane, new Insets(0, 10, 20, 10));
+            GridPane.setMargin(anchorPane, new Insets(5, 12, 20, 12));
             GridPane.setHgrow(anchorPane, Priority.ALWAYS);
         } catch (IOException e) {
             message("Error", e.getMessage());
         }
     }
 
-    public abstract void insertAction(AnchorPane anchorPane, Displayable data);
-
     private void centerGrid() {
         double marginSize = 20;
-        grid.setPadding(new Insets(0, marginSize, 0, marginSize));
+        grid.setPadding(new Insets(0, marginSize , 0, marginSize));
     }
+
+    public abstract void insertAction(AnchorPane anchorPane, Displayable data);
 
 }
