@@ -3,11 +3,14 @@
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
+<?import javafx.geometry.Point3D?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Pagination?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
@@ -15,6 +18,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
@@ -70,24 +74,92 @@
                             <content>
                                 <VBox fx:id="container" alignment="TOP_LEFT" fillWidth="true">
                                     <VBox fx:id="banner" alignment="CENTER_LEFT" nodeOrientation="LEFT_TO_RIGHT" styleClass="banner" VBox.vgrow="ALWAYS">
-                                        <clip>
-                                            <Rectangle fx:id="bannerClip" />
-                                        </clip>
+                                       <clip>
+                                           <Rectangle fx:id="bannerClip" />
+                                       </clip>
                                         <children>
-                                            <StackPane prefHeight="150.0" prefWidth="200.0">
+                                            <StackPane>
                                                 <children>
                                                     <AnchorPane>
                                           <padding>
                                              <Insets bottom="10.0" right="5.0" top="7.0" />
                                           </padding>
-                                                    </AnchorPane>
+                                          <children>
 
-                                                          <!-- Tu VBox con el texto -->
-                                                    <VBox>
-                                          <padding>
-                                             <Insets left="5.0" />
-                                          </padding>
-                                                    </VBox>
+                                                          <VBox maxHeight="200.0" minHeight="200.0" prefHeight="200.0" AnchorPane.leftAnchor="0.0">
+                                                <padding>
+                                                   <Insets left="5.0" />
+                                                </padding>
+                                                <children>
+                                                   <ImageView fx:id="figura3" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" rotate="120.0" scaleX="1.2" scaleY="1.6" translateX="2.0" translateY="-34.0">
+                                                      <image>
+                                                         <Image url="@../../../img/Figura3.png" />
+                                                      </image>
+                                                   </ImageView>
+                                                   <ImageView fx:id="figura4" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" rotate="-110.0" scaleX="1.4" scaleY="1.7" translateX="30.0">
+                                                      <image>
+                                                         <Image url="@../../../img/Figura2.png" />
+                                                      </image>
+                                                   </ImageView>
+                                                </children>
+                                                          </VBox>
+                                             <VBox maxHeight="200.0" minHeight="200.0" prefHeight="200.0" AnchorPane.rightAnchor="0.0">
+                                                <children>
+                                                   <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" scaleX="1.8" scaleY="1.8" translateX="-48.0" translateY="57.0">
+                                                      <image>
+                                                         <Image url="@../../../img/ImgBanner.png" />
+                                                      </image>
+                                                   </ImageView>
+                                                   <ImageView fx:id="figura2" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" rotate="-170.0" scaleX="1.6" scaleY="1.6" translateX="-115.0" translateY="-228.0">
+                                                      <image>
+                                                         <Image url="@../../../img/Figura3.png" />
+                                                      </image>
+                                                      <rotationAxis>
+                                                         <Point3D x="-50.0" y="10.0" z="1.0" />
+                                                      </rotationAxis>
+                                                   </ImageView>
+                                                   <ImageView fx:id="figura1" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0" scaleX="1.3" scaleY="1.3" translateX="17.0" translateY="-130.0">
+                                                      <image>
+                                                         <Image url="@../../../img/Figura2.png" />
+                                                      </image>
+                                                   </ImageView>
+                                                   <ImageView fx:id="imageView" fitHeight="90.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true" translateX="-80.0" translateY="-305.0">
+                                                      <image>
+                                                         <Image url="@../../../img/Figura1.png" />
+                                                      </image>
+                                                   </ImageView>
+                                                   <ImageView fx:id="icon" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" translateX="-65.0" translateY="-380.0">
+                                                      <image>
+                                                         <Image url="@../../../img/Logo.png" />
+                                                      </image>
+                                                   </ImageView>
+                                                </children>
+                                             </VBox>
+                                             <VBox alignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <children>
+                                                   <Circle fx:id="circulo" fill="#e9fdd3" radius="25.0" scaleX="10.0" scaleY="7.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" translateY="300.0" />
+                                                   <Label alignment="CENTER" contentDisplay="CENTER" graphicTextGap="2.0" prefHeight="62.0" prefWidth="35.0" scaleX="8.0" scaleY="8.0" text="Tú haces" textAlignment="CENTER" translateY="-35.0" wrapText="true">
+                                                      <font>
+                                                         <Font name="Franklin Gothic Heavy" size="6.0" />
+                                                      </font>
+                                                      <rotationAxis>
+                                                         <Point3D x="1.0" />
+                                                      </rotationAxis>
+                                                   </Label>
+                                                   <Label alignment="CENTER" contentDisplay="CENTER" graphicTextGap="2.0" prefHeight="62.0" prefWidth="35.0" scaleX="8.0" scaleY="8.0" text="que suceda" textAlignment="CENTER" translateY="-58.0" wrapText="true">
+                                                      <font>
+                                                         <Font name="Franklin Gothic Heavy" size="6.0" />
+                                                      </font>
+                                                   </Label>
+                                                   <Label prefHeight="33.0" prefWidth="120.0" scaleX="1.7" scaleY="1.7" text="“Tu energía, tu compromiso y tu trato hacen que todo funcione”" textAlignment="CENTER" translateY="5.0" wrapText="true">
+                                                      <font>
+                                                         <Font name="System Bold" size="7.0" />
+                                                      </font>
+                                                   </Label>
+                                                </children>
+                                             </VBox>
+                                          </children>
+                                                    </AnchorPane>
                                                 </children>
                                             </StackPane>
 
@@ -127,11 +199,24 @@
                                              <Insets />
                                           </HBox.margin>
                                          </Button>
-                                       <Region HBox.hgrow="ALWAYS" />
+                                       <Button fx:id="resurtirTab" mnemonicParsing="false" onAction="#handleResurtir" styleClass="nav-tab">
+                                          <graphic>
+                                             <HBox>
+                                                <children>
+                                                   <FontAwesomeIconView glyphName="" text="">
+                                                      <HBox.margin>
+                                                         <Insets right="10.0" top="3.0" />
+                                                      </HBox.margin>
+                                                   </FontAwesomeIconView>
+                                                   <Label text="Resurtir" />
+                                                </children>
+                                             </HBox>
+                                          </graphic>
+                                       </Button>
 
-                                                    <Button fx:id="agregarTab" mnemonicParsing="false" onAction="#handleAgregar" styleClass="nav-tab">
+                                                                      <Button fx:id="agregarTab" mnemonicParsing="false" onAction="#handleAgregar" styleClass="nav-tab">
 
-                                                        <graphic>
+                                                                          <graphic>
                                                  <HBox>
                                                      <children>
                                                          <FontAwesomeIconView glyphName="PLUS">
@@ -142,13 +227,10 @@
                                                      </children>
                                                  </HBox>
                                              </graphic>
-                                          <HBox.margin>
-                                             <Insets right="20.0" />
-                                          </HBox.margin>
                                          </Button>
                                     </children>
                                     <padding>
-                                       <Insets bottom="10.0" left="10.0" top="10.0" />
+                                       <Insets bottom="10.0" left="10.0" />
                                     </padding>
                                  </HBox>
                                </children>

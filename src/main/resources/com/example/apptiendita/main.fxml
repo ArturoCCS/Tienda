@@ -110,7 +110,7 @@
                 <!-- Botones secundarios -->
                 <VBox spacing="10.0">
                     <children>
-                        <Button maxWidth="Infinity">
+                        <Button maxWidth="Infinity" onAction="#oyenteReportes">
                             <graphic>
                                 <HBox alignment="CENTER_LEFT" spacing="9.0">
                                     <FontAwesomeIconView glyphName="BAR_CHART" styleClass="nav-icon">

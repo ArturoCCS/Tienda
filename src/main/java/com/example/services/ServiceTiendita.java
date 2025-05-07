@@ -6,7 +6,7 @@ import com.example.model.Product;
 
 import java.util.List;
 
-import static com.example.dao.IOXUtility.loadData;
+import static com.example.dao.IOXUtility.*;
 
 public class ServiceTiendita {
 
@@ -14,7 +14,7 @@ public class ServiceTiendita {
 
         try {
 
-            List<Product> products = loadData("productos.txt");
+            List<Product> products = loadDataProduct("productos.txt");
             Operable<Product> catalogo =  new Container<>();
             catalogo.addAll(products);
 

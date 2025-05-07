@@ -5,6 +5,7 @@ module com.example.apptiendita {
     requires com.jfoenix;
     requires AnimateFX;
     requires eu.iamgio.animated;
+    requires java.desktop;
 
 
     opens com.example.apptiendita to javafx.fxml, javafx.base;

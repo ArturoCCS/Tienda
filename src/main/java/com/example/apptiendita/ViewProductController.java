@@ -6,9 +6,11 @@ import animatefx.animation.SlideOutRight;
 import com.example.interfaces.Displayable;
 import com.example.interfaces.Keyable;
 import com.example.model.Product;
+import com.example.model.Resurtido;
 import com.example.model.ViewOperable;
 import com.example.vista.PanelCapturaProductos;
 import com.example.vista.PanelEditarProducto;
+import com.example.vista.PanelResurtir;
 import javafx.animation.*;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -21,11 +23,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
+import javafx.scene.effect.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -42,21 +46,53 @@ public class ViewProductController extends ViewOperable {
 
     @FXML
     private Button agregarTab;
+
     @FXML
-    private Label label;
+    private VBox banner;
+
+    @FXML
+    private Rectangle bannerClip;
+
+    @FXML
+    private Circle circulo;
+
+    @FXML
+    private VBox container;
+
+    @FXML
+    private ImageView figura1;
+
+    @FXML
+    private ImageView figura2;
+
+    @FXML
+    private ImageView figura3;
+
+    @FXML
+    private ImageView figura4;
+
+    @FXML
+    private VBox homeItems;
+
+    @FXML
+    private ImageView icon;
+
+    @FXML
+    private ImageView imageView;
 
     @FXML
     private Button inventarioTab;
 
     @FXML
-    private ImageView imgBanner;
+    private TextField txtSearch;
+
     @FXML
     private Button ventaTab;
 
-    @FXML private Rectangle bannerClip;
-    @FXML private VBox banner;
     @FXML
-    private TextField txtSearch;
+    private Button resurtirTab;
+
+    private List<? extends Keyable> resurtidos;
 
     private ShoppingCartController shoppingCartController;
 
@@ -68,6 +104,10 @@ public class ViewProductController extends ViewOperable {
         this.anchorPaneVenta = anchorPaneVenta;
     }
 
+    public void setCatalogoResurtidos(List<? extends Keyable> resurtidos) {
+        this.resurtidos = resurtidos;
+    }
+
     @FXML
     private void initialize() {
         //Establecemos el modo por defecto "Inventario"
@@ -75,10 +115,8 @@ public class ViewProductController extends ViewOperable {
         setDataList(getCatalog());
         super.setupScrollListener();
 
-
-        bannerClip.widthProperty().bind(banner.widthProperty());
-        bannerClip.heightProperty().bind(banner.heightProperty());
-
+        configBanner();
+        
         setupPagination(getCatalog());
 
         getContainer().setCache(true);
@@ -95,7 +133,7 @@ public class ViewProductController extends ViewOperable {
         Platform.runLater(() -> getContainer().requestFocus());
         txtSearch.setOnAction(this::search);
 
-        List<Button> tabs = List.of(inventarioTab, ventaTab, agregarTab);
+        List<Button> tabs = List.of(inventarioTab, ventaTab, resurtirTab, agregarTab);
 
         for (Button tab : tabs) {
             applyHoverAnimation(tab);
@@ -118,6 +156,56 @@ public class ViewProductController extends ViewOperable {
 
         inventarioTab.getStyleClass().add("selected");
     }
+
+    private void configBanner() {
+        bannerClip.widthProperty().bind(banner.widthProperty());
+        bannerClip.heightProperty().bind(banner.heightProperty());
+
+        ColorInput colorInputFiguras = new ColorInput(
+                0, 0,
+                icon.getImage().getWidth(),
+                icon.getImage().getHeight(),
+                Color.web("#b8d499")
+        );
+
+        Blend blend2 = new Blend(
+                BlendMode.SRC_ATOP,
+                null,
+                colorInputFiguras
+        );
+
+        ColorInput colorInputImageView = new ColorInput(
+                0, 0,
+                imageView.getImage().getWidth(),
+                imageView.getImage().getHeight(),
+                Color.web("#ffffff")
+        );
+
+        Blend blend = new Blend(
+                BlendMode.SRC_ATOP,
+                null,
+                colorInputImageView
+        );
+
+        DropShadow dropShadow = new DropShadow();
+        dropShadow.setColor(Color.web("#b8d499"));
+        dropShadow.setRadius(20);
+        dropShadow.setSpread(0.01);
+        dropShadow.setOffsetX(0);
+        dropShadow.setOffsetY(0.1);
+
+        dropShadow.setInput(blend);
+        imageView.setEffect(dropShadow);
+
+        icon.setEffect(blend2);
+        figura1.setEffect(blend2);
+        figura2.setEffect(blend2);
+        figura3.setEffect(blend2);
+        figura4.setEffect(blend2);
+        circulo.setFill(Color.web("#b8d499"));
+    }
+
+
 
     @FXML
     private void search(ActionEvent event) {
@@ -286,6 +374,15 @@ public class ViewProductController extends ViewOperable {
         stageCaptura.initModality(javafx.stage.Modality.APPLICATION_MODAL);
         @SuppressWarnings("unchecked")
         PanelCapturaProductos panelCaptura = new PanelCapturaProductos((List<Product>) getCatalog(), this);
+        panelCaptura.start(stageCaptura);
+    }
+
+    @FXML
+    private void handleResurtir(ActionEvent event){
+        Stage stageCaptura = new Stage();
+        stageCaptura.initModality(javafx.stage.Modality.APPLICATION_MODAL);
+        @SuppressWarnings("unchecked")
+        PanelResurtir panelCaptura = new PanelResurtir((List<Resurtido>) resurtidos, this);
         panelCaptura.start(stageCaptura);
     }
 }

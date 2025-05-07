@@ -3,6 +3,7 @@ package com.example.dao;
 import com.example.interfaces.Keyable;
 import com.example.interfaces.Operable;
 import com.example.model.Product;
+import com.example.model.Resurtido;
 
 import java.io.*;
 import java.net.URL;
@@ -19,7 +20,7 @@ import static com.example.utility.FormUtility.*;
 
 public class IOXUtility {
 
-    public static List<Product> loadData(String path) {
+    public static List<Product> loadDataProduct(String path) {
         InputStream inputStream = IOXUtility.class.getClassLoader().getResourceAsStream(path);
         if (inputStream!=null) {
              Scanner entrada = new Scanner(inputStream);
@@ -30,6 +31,23 @@ public class IOXUtility {
              }
              entrada.close();
              return data;
+        }
+        System.out.println("No se encontro el archivo");
+
+        return null;
+    }
+
+    public static List<Resurtido> loadDataResurtido(String path) {
+        InputStream inputStream = IOXUtility.class.getClassLoader().getResourceAsStream(path);
+        if (inputStream!=null) {
+            Scanner entrada = new Scanner(inputStream);
+            List<Resurtido> data = new ArrayList<>();
+            while (entrada.hasNext()) {
+                String line = entrada.nextLine();
+                data.add(getResurtido(line));
+            }
+            entrada.close();
+            return data;
         }
         System.out.println("No se encontro el archivo");
 
@@ -57,6 +75,17 @@ public class IOXUtility {
     }
 
 
+
+    private static Resurtido getResurtido(String line) {
+        Resurtido resurtido = new Resurtido();
+        String[] items = line.split(",");
+        for(int i = 0; i < items.length; i++){
+            resurtido.setCodigoBarras(items[0]);
+            resurtido.setCantidad(Integer.parseInt(items[1].trim()));
+            resurtido.setMes(items[2]);
+        }
+        return resurtido;
+    }
 
 
     private static Product getProducto(String line) {

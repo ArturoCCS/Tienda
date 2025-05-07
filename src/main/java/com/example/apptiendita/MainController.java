@@ -2,6 +2,7 @@ package com.example.apptiendita;
 
 import com.example.interfaces.Keyable;
 import com.example.interfaces.Operable;
+import com.example.model.Resurtido;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,7 +11,9 @@ import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 
+import javax.swing.*;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static com.example.utility.FormUtility.message;
 
@@ -74,6 +77,7 @@ public class MainController {
             protected Parent call() throws Exception {
                 productController = new ViewProductController();
                 productController.setDataList(catalogs.get("productos").getAll());
+                productController.setCatalogoResurtidos(catalogs.get("resurtidos").getAll());
 
                 FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource("viewProducts.fxml"));
                 loader.setController(productController);
@@ -116,6 +120,30 @@ public class MainController {
             System.out.println(preloadTask.getException().getMessage());
         });
     }
+
+    @FXML
+    void oyenteReportes(ActionEvent event) {
+        String cadena = "Lista de resurtidos \n";
+
+// Obtener la lista original
+        List<? extends Keyable> lista = catalogs.get("resurtidos").getAll();
+
+// Filtrar, castear, ordenar y recolectar los Resurtido
+        List<Resurtido> resurtidosOrdenados = lista.stream()
+                .filter(keyable -> keyable instanceof Resurtido)
+                .map(keyable -> (Resurtido) keyable)
+                .sorted(Comparator.comparingInt(Resurtido::getCantidad).reversed()) // mayor a menor
+                .collect(Collectors.toList());
+
+// Construir la cadena con los datos relevantes
+        for (Resurtido item : resurtidosOrdenados) {
+            cadena += String.format("Código: %s | Cantidad: %d | Mes: %s%n",
+                    item.getCodigoBarras(), item.getCantidad(), item.getMes());
+        }
+
+        JOptionPane.showMessageDialog(null, cadena);
+    }
+
 
     private void mostrarEnAnchorPane(Parent nodo) {
         anchorPaneCenter.getChildren().clear();

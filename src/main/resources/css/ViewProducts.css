@@ -146,7 +146,7 @@
     -fx-font-size: 13px;
 
     -fx-padding: 10 10 10 10;
-    -fx-background-color: #267766;
+    -fx-background-color: #045002;
     -fx-background-radius: 10;
 
     -fx-border-color: transparent;
@@ -168,7 +168,7 @@
 
 .selected{
     -fx-background-color: #ffffff;
-    -fx-border-color: #36a68e;
+    -fx-border-color: #045002;
 
 }
 .selected .glyph-icon{
@@ -181,9 +181,9 @@
 
 
 .banner{
-    /*-fx-background-color: rgba(21, 66, 24, 0.84);*/
+    -fx-background-color: rgb(254, 255, 247);
 
-    -fx-background-color: linear-gradient(to bottom, rgba(186, 230, 210, 0.6) 20%, rgba(212, 241, 229, 0.2) 90%);
+    /*-fx-background-color: linear-gradient(to bottom, rgba(186, 230, 210, 0.6) 20%, rgba(212, 241, 229, 0.2) 90%);*/
 
     -fx-background-radius: 10 10 10 10;
 }

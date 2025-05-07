@@ -4,6 +4,7 @@ import com.example.interfaces.Keyable;
 import com.example.interfaces.Operable;
 import com.example.model.Container;
 import com.example.model.Product;
+import com.example.model.Resurtido;
 import com.example.utility.JFXDecorator;
 import javafx.animation.*;
 import javafx.application.Application;
@@ -166,9 +167,13 @@ public class MainApplication extends Application {
     private void initCatalogs() {
         catalogs = new HashMap<>();
 
-        Operable<Product> catalog = new Container<>();
-        catalog.addAll(loadData(FILE_PATH));
-        catalogs.put("productos", catalog);
+        Operable<Product> catalogProduct = new Container<>();
+        Operable<Resurtido> catalogResurtido = new Container<>();
+
+        catalogProduct.addAll(loadDataProduct(FILE_PATH));
+        catalogResurtido.addAll(loadDataResurtido("resurtidos"));
+        catalogs.put("productos", catalogProduct);
+        catalogs.put("resurtidos", catalogResurtido);
     }
 
     public static void main(String[] args) {
