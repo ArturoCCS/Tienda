@@ -261,8 +261,16 @@ public class ViewProductController extends ViewOperable {
                 if (getModo().equals("Inventario") && data instanceof Product producto) {
                     new PanelEditarProducto(producto, (List<Product>) getCatalog(), this).mostrarVentana();
                 } else if (getModo().equals("Venta") && data instanceof Product) {
+                    // Verificar si ya fue seleccionado
+                    Object flag = anchorPane.getProperties().get("seleccionado");
+                    if (flag != null && (boolean) flag) {
+                        return; // Ya fue seleccionado antes, no hacer nada
+                    }
+
                     shoppingCartController.modoVenta(data);
+                    anchorPane.getProperties().put("seleccionado", true); // Marcar como seleccionado
                 }
+
             }
         });
 

@@ -17,9 +17,6 @@ public class CardController {
     @FXML
     private Label name;
 
-    @FXML
-    private Label price;
-
 
     public void setProducto(Displayable item) {
 
@@ -29,10 +26,12 @@ public class CardController {
         name.setWrapText(true);
         name.setMaxWidth(150);
         name.setMinHeight(50);
-        descrip.setText(item.getShortDescription().trim());
-        descrip.setWrapText(true);
-        descrip.setMaxWidth(150);
-        descrip.setMinHeight(50);
+        if (descrip != null) {
+            descrip.setText(item.getShortDescription().trim());
+            descrip.setWrapText(true);
+            descrip.setMaxWidth(150);
+            descrip.setMinHeight(50);
+        }
 
         // Este todavia no se puede usar por las url que no son validas
 //            if (item.getImageUrl() != null) {
