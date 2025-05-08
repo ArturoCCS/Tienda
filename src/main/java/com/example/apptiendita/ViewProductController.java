@@ -37,6 +37,7 @@ import javafx.util.Duration;
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import static com.example.utility.AnimationHelper.applyHoverAnimation;
@@ -310,20 +311,17 @@ public class ViewProductController extends ViewOperable {
 
         });
 
-        String query = "cola";
-
+        Set<String> codigosResurtidos = resurtidos.stream()
+                .map(Keyable::getKey)
+                .collect(Collectors.toSet());
 
         List<? extends Keyable> filteredData = getCatalog().stream()
-                .filter(product -> product instanceof Product)
-                .map(product -> (Product) product)
-                .filter(product -> {
-                    return product.getNombre().toLowerCase().contains(query) ||
-                            product.getDescripcion().toLowerCase().contains(query) ||
-                            product.getCategoria().toLowerCase().contains(query);
-                }).collect(Collectors.toList());
+                .filter(p -> codigosResurtidos.contains(p.getKey()))
+                .collect(Collectors.toList());
 
         if (filteredData.isEmpty()) {
-            message("Sin resultados","No se encontraron productos que coincidan con '" + query + "'.");
+            message("Sin resultados","No hay productos resurtidos'");
+            return;
         } else {
             setCatalogFiltered(filteredData);
             setupPagination(filteredData);
