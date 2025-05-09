@@ -51,7 +51,7 @@ public class MainApplication extends Application {
         new Thread(() -> {
             try {
                 initCatalogs();
-                Thread.sleep(0);
+                Thread.sleep(200);
                 MainController controller = new MainController();
                 controller.setCatalogs(catalogs);
                 controller.preloadCatalogView();
