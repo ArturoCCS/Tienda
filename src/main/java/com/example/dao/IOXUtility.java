@@ -1,5 +1,6 @@
 package com.example.dao;
 
+import com.example.enumeraciones.Category;
 import com.example.interfaces.Keyable;
 import com.example.interfaces.Operable;
 import com.example.model.Product;
@@ -96,7 +97,7 @@ public class IOXUtility {
             product.setNombre(items[1]);
             product.setMarca(items[2]);
             product.setDescripcion(items[3]);
-            product.setCategoria(items[4]);
+            product.setCategoria(Category.valueOf(items[4].trim().toUpperCase()));
             product.setUnidadMedida(items[5]);
             product.setContenido(items[6]);
             product.setPresentacion(items[7]);

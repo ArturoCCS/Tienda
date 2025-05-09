@@ -1,5 +1,6 @@
 package com.example.model;
 
+import com.example.enumeraciones.Category;
 import com.example.interfaces.Keyable;
 import com.example.interfaces.Displayable;
 
@@ -7,7 +8,7 @@ public class Product implements Displayable, Keyable {
     private String codigoBarras;
     private String nombre;
     private String marca;
-    private String categoria;
+    private Category categoria;
     private String contenido;
     private String presentacion;
     private String unidadMedida;
@@ -52,11 +53,11 @@ public class Product implements Displayable, Keyable {
         this.marca = marca;
     }
 
-    public String getCategoria() {
+    public Category getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(String categoria) {
+    public void setCategoria(Category categoria) {
         this.categoria = categoria;
     }
 
@@ -146,6 +147,10 @@ public class Product implements Displayable, Keyable {
         return descripcion;
     }
 
+    @Override
+    public Category getStyle() {
+        return getCategoria();
+    }
 
 
 }

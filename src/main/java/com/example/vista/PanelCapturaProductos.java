@@ -1,5 +1,6 @@
 package com.example.vista;
 
+import com.example.enumeraciones.Category;
 import com.example.model.ViewOperable;
 import com.example.model.Product;
 import javafx.application.Application;
@@ -56,7 +57,9 @@ public class PanelCapturaProductos extends Application {
         marcaField = new TextField();
         descripcionArea = new TextArea();
         categoriaCombo = new ComboBox<>();
-        categoriaCombo.getItems().addAll("Bebidas", "Comestibles", "Electrónicos", "Otros");
+        for (Category category: Category.values()) {
+            categoriaCombo.getItems().add(category.toString());
+        }
         unidadMedidaCombo = new ComboBox<>();
         unidadMedidaCombo.getItems().addAll("Unidades", "Kilogramos", "Litros", "Gramos");
         contenidoField = new TextField();
@@ -162,25 +165,14 @@ public class PanelCapturaProductos extends Application {
 
                     Product product = new Product(codigoBarrasField.getText());
                     product.setNombre(nombreField.getText());
-                    System.out.println(nombreField.getText());
                     product.setMarca(marcaField.getText());
-
-                    System.out.println(marcaField.getText());
                     product.setDescripcion(descripcionArea.getText());
-
-
-                    System.out.println(descripcionArea.getText());
-                    product.setCategoria(categoriaCombo.getValue());
-
-                    System.out.println(categoriaCombo.getValue());
+                    product.setCategoria(Category.fromString(categoriaCombo.getValue()));
                     product.setUnidadMedida(unidadMedidaCombo.getValue());
-
-                    System.out.println(unidadMedidaCombo.getValue());
                     product.setContenido(contenidoField.getText());
                     product.setPresentacion(presentacionCombo.getValue());
                     product.setActivo(activoCheckBox.isSelected());
                     product.setImagenUrl(imagenUrlField.getText());
-
                     catalogo.add(product);
                     message("Alerta", "Producto agregado con exito, el editar se a actualizada" );
                     PRODUCT_CONTROLLER.setCatalogFiltered(catalogo);

@@ -225,7 +225,7 @@ public class ViewProductController extends ViewOperable {
                 .filter(product -> {
                     return product.getNombre().toLowerCase().contains(query) ||
                             product.getDescripcion().toLowerCase().contains(query) ||
-                            product.getCategoria().toLowerCase().contains(query);
+                            product.getCategoria().toString().toLowerCase().contains(query);
                 }).collect(Collectors.toList());
 
         if (filteredData.isEmpty()) {

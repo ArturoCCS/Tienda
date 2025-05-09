@@ -1,5 +1,6 @@
 package com.example.vista;
 
+import com.example.enumeraciones.Category;
 import com.example.model.Product;
 import com.example.model.ViewOperable;
 import javafx.application.Platform;
@@ -51,8 +52,10 @@ public class PanelEditarProducto {
         descripcionArea = new TextArea(producto.getDescripcion());
 
         categoriaCombo = new ComboBox<>();
-        categoriaCombo.getItems().addAll("Bebidas", "Comestibles", "Electrónicos", "Otros");
-        categoriaCombo.setValue(producto.getCategoria());
+        for (Category category: Category.values()) {
+            categoriaCombo.getItems().add(category.toString());
+        }
+        categoriaCombo.setValue(producto.getCategoria().toString());
 
         unidadMedidaCombo = new ComboBox<>();
         unidadMedidaCombo.getItems().addAll("Unidades", "Kilogramos", "Litros", "Gramos");
@@ -81,7 +84,7 @@ public class PanelEditarProducto {
             producto.setNombre(formatText(nombreField.getText()));
             producto.setMarca(formatText(marcaField.getText()));
             producto.setDescripcion(formatText(descripcionArea.getText()));
-            producto.setCategoria(categoriaCombo.getValue());
+            producto.setCategoria(Category.fromString(categoriaCombo.getValue()));
             producto.setUnidadMedida(unidadMedidaCombo.getValue());
             producto.setContenido(formatText(contenidoField.getText()));
             producto.setPresentacion(presentacionCombo.getValue());
