@@ -147,10 +147,4 @@ public class Product implements Displayable, Keyable {
         return descripcion;
     }
 
-    @Override
-    public Category getStyle() {
-        return getCategoria();
-    }
-
-
 }
