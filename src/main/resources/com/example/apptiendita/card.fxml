@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="160.0" prefWidth="265.0" styleClass="card" stylesheets="@../../../css/ViewProducts.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.apptiendita.CardController">
+<AnchorPane prefHeight="160.0" prefWidth="265.0" styleClass="card" stylesheets="@../../../css/ViewProducts.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox prefHeight="160.0" prefWidth="265.0">
          <children>
