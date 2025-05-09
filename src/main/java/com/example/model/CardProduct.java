@@ -6,7 +6,7 @@ public class CardProduct extends CardDisplayable {
 
 
     @Override
-    <T extends Keyable> void action(T item) {
+    public <T extends Keyable> void action(T item) {
 
     }
 }

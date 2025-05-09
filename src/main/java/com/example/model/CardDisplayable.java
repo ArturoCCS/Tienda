@@ -40,7 +40,7 @@ public abstract class CardDisplayable {
 
     }
 
-    abstract <T extends Keyable> void action(T item);
+    public abstract <T extends Keyable> void action(T item);
 
 
 }
