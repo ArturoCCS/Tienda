@@ -14,42 +14,44 @@
    <children>
       <VBox prefHeight="160.0" prefWidth="265.0">
          <children>
-            <Pane prefHeight="16.0" prefWidth="250.0" />
-            <HBox prefHeight="145.0" prefWidth="250.0">
+            <VBox fx:id="container">
                <children>
-                  <Pane prefHeight="195.0" prefWidth="25.0" />
-                  <ImageView fx:id="image" fitHeight="101.0" fitWidth="147.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../img/Default.png" />
-                     </image></ImageView>
-                  <VBox prefHeight="145.0" prefWidth="103.0">
+                  <HBox prefHeight="145.0" prefWidth="250.0">
                      <children>
-                        <Label fx:id="name" text="Label">
-                           <font>
-                              <Font size="11.0" />
-                           </font>
-                        </Label>
-                        <Pane prefHeight="9.0" prefWidth="136.0" />
-                        <Label fx:id="descrip" text="Label">
-                           <font>
-                              <Font size="10.0" />
-                           </font></Label>
-                        <Pane prefHeight="27.0" prefWidth="136.0" />
-                        <Label fx:id="price" text="Label">
-                           <font>
-                              <Font size="11.0" />
-                           </font>
-                           <VBox.margin>
-                              <Insets bottom="10.0" />
-                           </VBox.margin>
-                        </Label>
+                        <Pane prefHeight="195.0" prefWidth="18.0" />
+                        <ImageView fx:id="image" fitHeight="160.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS">
+                           <image>
+                              <Image url="@../../../img/Default.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets top="12.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <VBox prefHeight="145.0" prefWidth="103.0">
+                           <children>
+                              <Label fx:id="name" alignment="TOP_LEFT" prefHeight="70.0" prefWidth="80.0" text="Label" textFill="#2f2f2f">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Label>
+                              <Pane prefHeight="9.0" prefWidth="136.0" />
+                              <Label fx:id="descrip" alignment="TOP_LEFT" prefHeight="80.0" prefWidth="86.0" text="Label" textFill="#5c5c5c">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets left="10.0" right="5.0" />
+                           </padding>
+                           <HBox.margin>
+                              <Insets top="12.0" />
+                           </HBox.margin>
+                        </VBox>
                      </children>
-                     <padding>
-                        <Insets left="10.0" right="5.0" />
-                     </padding>
-                  </VBox>
+                  </HBox>
                </children>
-            </HBox>
+            </VBox>
          </children>
       </VBox>
    </children>
