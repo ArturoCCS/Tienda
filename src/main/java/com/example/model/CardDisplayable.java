@@ -1,12 +1,12 @@
-package com.example.apptiendita;
+package com.example.model;
 
 import com.example.interfaces.Displayable;
+import com.example.interfaces.Keyable;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 
-public class CardController {
+public abstract class CardDisplayable {
 
     @FXML
     private Label descrip;
@@ -18,7 +18,7 @@ public class CardController {
     private Label name;
 
 
-    public void setProducto(Displayable item) {
+    public void setDisplayable(Displayable item) {
 
         name.setText(item.getTitle().trim());
 
@@ -39,6 +39,8 @@ public class CardController {
 //            }
 
     }
+
+    abstract <T extends Keyable> void action(T item);
 
 
 }

@@ -1,13 +1,8 @@
 package com.example.apptiendita;
 
-import animatefx.animation.Pulse;
-import animatefx.animation.SlideInLeft;
-import animatefx.animation.SlideOutRight;
 import com.example.interfaces.Displayable;
 import com.example.interfaces.Keyable;
-import com.example.model.Product;
-import com.example.model.Resurtido;
-import com.example.model.ViewOperable;
+import com.example.model.*;
 import com.example.vista.PanelCapturaProductos;
 import com.example.vista.PanelEditarProducto;
 import com.example.vista.PanelResurtir;
@@ -16,17 +11,12 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
 import javafx.scene.CacheHint;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.effect.*;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -36,7 +26,6 @@ import javafx.util.Duration;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -240,6 +229,11 @@ public class ViewProductController extends ViewOperable {
         getGrid().requestFocus();
     }
 
+    @Override
+    public CardDisplayable getController() {
+        return new CardProduct();
+    }
+
 
     @SuppressWarnings("unchecked")
     @Override
@@ -257,18 +251,18 @@ public class ViewProductController extends ViewOperable {
             double movementThreshold = 10;
 
             if (dx < movementThreshold && dy < movementThreshold) {
-
-                if (getModo().equals("Inventario") && data instanceof Product producto) {
-                    new PanelEditarProducto(producto, (List<Product>) getCatalog(), this).mostrarVentana();
-                } else if (getModo().equals("Venta") && data instanceof Product) {
-                    Object flag = anchorPane.getProperties().get("seleccionado");
-                    if (flag != null && (boolean) flag) {
-                        return;
+                if (data instanceof Product product) {
+                    if (getModo().equals("Inventario")) {
+                        new PanelEditarProducto(product, (List<Product>) getCatalog(), this).mostrarVentana();
+                    } else if (getModo().equals("Venta")) {
+                        Object flag = anchorPane.getProperties().get("seleccionado");
+                        if (flag != null && (boolean) flag) {
+                            return;
+                        }
+                        shoppingCartController.modoVenta(product);
+                        anchorPane.getProperties().put("seleccionado", true);
                     }
-                    shoppingCartController.modoVenta(data);
-                    anchorPane.getProperties().put("seleccionado", true);
                 }
-
             }
         });
 

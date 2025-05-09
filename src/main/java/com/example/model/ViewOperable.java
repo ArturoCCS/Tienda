@@ -1,6 +1,5 @@
 package com.example.model;
 
-import com.example.apptiendita.CardController;
 import com.example.interfaces.Displayable;
 import com.example.interfaces.Keyable;
 import javafx.animation.FadeTransition;
@@ -273,17 +272,19 @@ public abstract class ViewOperable {
     private void addDataToGrid(Keyable data, int column, int row, double cellWidth) {
         try {
 
+            var cardController = getController();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("card.fxml"));
+            loader.setController(cardController);
             AnchorPane anchorPane = loader.load();
-            CardController cardController = loader.getController();
 
-            if (data instanceof Displayable) {
-                cardController.setProducto((Displayable) data);
-
+            if (data instanceof Displayable displayable) {
+                cardController.setDisplayable(displayable);
                 if(modo!=null){
-                    insertAction(anchorPane,(Displayable) data);
+                    insertAction(anchorPane,displayable);
                 }
             }
+
+            cardController.action(data);
 
             anchorPane.setPrefWidth(cellWidth - 20);
             anchorPane.setMaxWidth(Double.MAX_VALUE);
@@ -297,6 +298,8 @@ public abstract class ViewOperable {
             message("Error", e.getMessage());
         }
     }
+
+    public abstract CardDisplayable getController();
 
     private void centerGrid() {
         double marginSize = 20;
