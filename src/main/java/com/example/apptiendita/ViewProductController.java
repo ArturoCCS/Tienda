@@ -261,14 +261,12 @@ public class ViewProductController extends ViewOperable {
                 if (getModo().equals("Inventario") && data instanceof Product producto) {
                     new PanelEditarProducto(producto, (List<Product>) getCatalog(), this).mostrarVentana();
                 } else if (getModo().equals("Venta") && data instanceof Product) {
-                    // Verificar si ya fue seleccionado
                     Object flag = anchorPane.getProperties().get("seleccionado");
                     if (flag != null && (boolean) flag) {
-                        return; // Ya fue seleccionado antes, no hacer nada
+                        return;
                     }
-
                     shoppingCartController.modoVenta(data);
-                    anchorPane.getProperties().put("seleccionado", true); // Marcar como seleccionado
+                    anchorPane.getProperties().put("seleccionado", true);
                 }
 
             }
@@ -283,6 +281,22 @@ public class ViewProductController extends ViewOperable {
 
         if(getModo().equals("Venta"))
             return;
+
+        Set<String> codigosResurtidos = resurtidos.stream()
+                .map(Keyable::getKey)
+                .collect(Collectors.toSet());
+
+        List<? extends Keyable> filteredData = getCatalog().stream()
+                .filter(p -> codigosResurtidos.contains(p.getKey()))
+                .collect(Collectors.toList());
+
+        if (filteredData.isEmpty()) {
+            message("Sin resultados","No hay productos resurtidos'");
+            return;
+        } else {
+            setCatalogFiltered(filteredData);
+            setupPagination(filteredData);
+        }
 
         getGrid().setDisable(true);
         agregarTab.setVisible(false);
@@ -318,23 +332,6 @@ public class ViewProductController extends ViewOperable {
             setModo("Venta");
 
         });
-
-        Set<String> codigosResurtidos = resurtidos.stream()
-                .map(Keyable::getKey)
-                .collect(Collectors.toSet());
-
-        List<? extends Keyable> filteredData = getCatalog().stream()
-                .filter(p -> codigosResurtidos.contains(p.getKey()))
-                .collect(Collectors.toList());
-
-        if (filteredData.isEmpty()) {
-            message("Sin resultados","No hay productos resurtidos'");
-            return;
-        } else {
-            setCatalogFiltered(filteredData);
-            setupPagination(filteredData);
-        }
-
         timeline.play();
 
     }
