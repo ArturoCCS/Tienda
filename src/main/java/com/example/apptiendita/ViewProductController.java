@@ -166,7 +166,7 @@ public class ViewProductController extends ViewOperable {
                 0, 0,
                 icon.getImage().getWidth(),
                 icon.getImage().getHeight(),
-                Color.web("#b8d499")
+                Color.web("#BAE6D299")
         );
 
         Blend blend2 = new Blend(
@@ -189,7 +189,7 @@ public class ViewProductController extends ViewOperable {
         );
 
         DropShadow dropShadow = new DropShadow();
-        dropShadow.setColor(Color.web("#b8d499"));
+        dropShadow.setColor(Color.web("#BAE6D299"));
         dropShadow.setRadius(20);
         dropShadow.setSpread(0.01);
         dropShadow.setOffsetX(0);
@@ -203,7 +203,7 @@ public class ViewProductController extends ViewOperable {
         figura2.setEffect(blend2);
         figura3.setEffect(blend2);
         figura4.setEffect(blend2);
-        circulo.setFill(Color.web("#b8d499"));
+        circulo.setFill(Color.web("#BAE6D299"));
     }
 
 

@@ -19,10 +19,10 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
+<?import javafx.scene.shape.Rectangle?>
 <VBox fx:id="homeItems" prefWidth="1000.0" stylesheets="@../../../css/ViewProducts.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <HBox alignment="TOP_RIGHT">
@@ -75,7 +75,7 @@
                                 <VBox fx:id="container" alignment="TOP_LEFT" fillWidth="true">
                                     <VBox fx:id="banner" alignment="CENTER_LEFT" nodeOrientation="LEFT_TO_RIGHT" styleClass="banner" VBox.vgrow="ALWAYS">
                                         <clip>
-                                            <Rectangle fx:id="bannerClip" arcWidth="30" arcHeight="30"/>
+                                            <Rectangle fx:id="bannerClip" arcHeight="35" arcWidth="35" />
                                         </clip>
                                         <children>
                                             <StackPane>
@@ -105,7 +105,7 @@
                                                           </VBox>
                                              <VBox maxHeight="120.0" minHeight="120.0" prefHeight="120.0" AnchorPane.rightAnchor="0.0">
                                                 <children>
-                                                   <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" scaleX="1.3" scaleY="1.3" translateX="-20.0" translateY="22.0">
+                                                   <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" scaleX="1.4" scaleY="1.4" translateX="-15.0" translateY="16.0">
                                                       <image>
                                                          <Image url="@../../../img/ImgBanner.png" />
                                                       </image>
@@ -138,17 +138,17 @@
                                              <VBox alignment="CENTER" prefHeight="120.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                 <children>
                                                    <Circle fx:id="circulo" fill="#e9fdd3" radius="25.0" scaleX="10.0" scaleY="7.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" translateY="275.0" />
-                                                   <Label alignment="CENTER" contentDisplay="CENTER" graphicTextGap="2.0" prefHeight="62.0" prefWidth="35.0" scaleX="8.0" scaleY="8.0" text="Tú haces" textAlignment="CENTER" translateY="-40.0" wrapText="true">
+                                                   <Label alignment="CENTER" contentDisplay="CENTER" graphicTextGap="2.0" prefHeight="35.0" prefWidth="54.0" scaleX="6.0" scaleY="6.0" text="Tú haces" textAlignment="CENTER" translateY="-40.0" wrapText="true">
                                                       <font>
-                                                         <Font name="Franklin Gothic Heavy" size="6.0" />
+                                                         <Font name="Franklin Gothic Heavy" size="10.0" />
                                                       </font>
                                                       <rotationAxis>
                                                          <Point3D x="1.0" />
                                                       </rotationAxis>
                                                    </Label>
-                                                   <Label alignment="CENTER" contentDisplay="CENTER" graphicTextGap="2.0" prefHeight="62.0" prefWidth="35.0" scaleX="8.0" scaleY="8.0" text="que suceda" textAlignment="CENTER" translateY="-40.0" wrapText="true">
+                                                   <Label alignment="CENTER" contentDisplay="CENTER" graphicTextGap="2.0" prefHeight="49.0" prefWidth="68.0" scaleX="6.0" scaleY="6.0" text="que suceda" textAlignment="CENTER" translateY="-25.0" wrapText="true">
                                                       <font>
-                                                         <Font name="Franklin Gothic Heavy" size="6.0" />
+                                                         <Font name="Franklin Gothic Heavy" size="10.0" />
                                                       </font>
                                                    </Label>
                                                 </children>
