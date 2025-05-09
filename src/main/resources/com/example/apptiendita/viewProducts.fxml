@@ -75,7 +75,7 @@
                                 <VBox fx:id="container" alignment="TOP_LEFT" fillWidth="true">
                                     <VBox fx:id="banner" alignment="CENTER_LEFT" nodeOrientation="LEFT_TO_RIGHT" styleClass="banner" VBox.vgrow="ALWAYS">
                                         <clip>
-                                            <Rectangle fx:id="bannerClip" />
+                                            <Rectangle fx:id="bannerClip" arcWidth="30" arcHeight="30"/>
                                         </clip>
                                         <children>
                                             <StackPane>

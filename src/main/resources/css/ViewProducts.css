@@ -185,7 +185,7 @@
 
     /*-fx-background-color: linear-gradient(to bottom, rgba(186, 230, 210, 0.6) 20%, rgba(212, 241, 229, 0.2) 90%);*/
 
-    -fx-background-radius: 10 10 10 10;
+    -fx-background-radius: 30 30 30 30;
 }
 
 .tooltip {
