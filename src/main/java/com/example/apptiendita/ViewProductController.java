@@ -133,15 +133,7 @@ public class ViewProductController extends ViewOperable {
                 tooltip.setShowDelay(Duration.millis(100));
                 tooltip.getStyleClass().add("tooltip");
                 Tooltip.install(agregarTab, tooltip);
-                continue;
             }
-            tab.setOnMouseClicked(e -> {
-                for (Button t : tabs) {
-                    t.getStyleClass().remove("selected");
-
-                }
-                tab.getStyleClass().add("selected");
-            });
         }
 
         inventarioTab.getStyleClass().add("selected");
@@ -316,7 +308,7 @@ public class ViewProductController extends ViewOperable {
                         new KeyValue(anchorPaneVenta.opacityProperty(), 0)
 
                 ),
-                new KeyFrame(Duration.seconds(0.5),
+                new KeyFrame(Duration.seconds(0.4),
                         new KeyValue(anchorPaneVenta.prefWidthProperty(), targetWidth, Interpolator.EASE_BOTH),
                         new KeyValue(anchorPaneVenta.opacityProperty(), 1, Interpolator.EASE_BOTH)
                 )
@@ -324,8 +316,10 @@ public class ViewProductController extends ViewOperable {
         timeline.setOnFinished(e -> {
             AnchorPane.setRightAnchor(shoppingCart, 0.0);
             setModo("Venta");
-
         });
+
+        inventarioTab.getStyleClass().remove("selected");
+        ventaTab.getStyleClass().add("selected");
         timeline.play();
 
     }
@@ -335,6 +329,9 @@ public class ViewProductController extends ViewOperable {
     private void handleInventario(ActionEvent event) {
         if(getModo().equals("Inventario"))
             return;
+
+        setCatalogFiltered(getCatalog());
+        setupPagination(getCatalog());
 
         AnchorPane anchorPaneVenta = this.anchorPaneVenta;
         double currentWidth = anchorPaneVenta.getWidth();
@@ -355,13 +352,12 @@ public class ViewProductController extends ViewOperable {
         timeline.setOnFinished(e -> {
             agregarTab.setVisible(true);
             anchorPaneVenta.getChildren().clear();
+            setModo("Inventario");
         });
 
+        ventaTab.getStyleClass().remove("selected");
+        inventarioTab.getStyleClass().add("selected");
         timeline.play();
-
-        setCatalogFiltered(getCatalog());
-        setupPagination(getCatalog());
-        setModo("Inventario");
     }
 
 
