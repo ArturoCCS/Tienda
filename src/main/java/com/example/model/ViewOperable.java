@@ -36,7 +36,7 @@ public abstract class ViewOperable {
 
     private String modo;
 
-    private static final int ITEMS_PER_PAGE = 20;
+    public static int itemsPerPage = 21;
     private static final double CELL_WIDTH = 320;
 
     private int lastPageIndex = -1;
@@ -119,7 +119,7 @@ public abstract class ViewOperable {
 
 
     private int calculateTotalPages(int totalItems) {
-        return (int) Math.ceil((double) totalItems / ITEMS_PER_PAGE);
+        return (int) Math.ceil((double) totalItems / itemsPerPage);
     }
 
     private Button createPaginationButton(String label, boolean disabled) {
@@ -252,8 +252,8 @@ public abstract class ViewOperable {
 
         double cellWidth = width / columnCount;
 
-        int start = pageIndex * ITEMS_PER_PAGE;
-        int end = Math.min(start + ITEMS_PER_PAGE, dataListToShow.size());
+        int start = pageIndex * itemsPerPage;
+        int end = Math.min(start + itemsPerPage, dataListToShow.size());
         int column = 0;
         int row = 1;
 
@@ -290,7 +290,6 @@ public abstract class ViewOperable {
             anchorPane.setMaxWidth(Double.MAX_VALUE);
             anchorPane.setCache(true);
             anchorPane.setCacheHint(CacheHint.QUALITY);
-            anchorPane.getProperties().put("controller", cardController);
             grid.add(anchorPane, column, row);
             GridPane.setMargin(anchorPane, new Insets(5, 12, 20, 12));
             GridPane.setHgrow(anchorPane, Priority.ALWAYS);
