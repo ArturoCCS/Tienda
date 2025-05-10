@@ -4,8 +4,8 @@ import com.example.model.Product;
 
 public class FormatDataUtility {
 
-    public static String formatDataProducto(Product product){
-        return String.format("%s,%s,%s,%s,%s,%s,%s,%s,%s,%s%n",
+    public static String formatDataProducto(Product product) {
+        return String.format("%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%.2f,%d%n",
                 product.getCodigpBarras(),
                 product.getNombre(),
                 product.getMarca(),
@@ -15,6 +15,8 @@ public class FormatDataUtility {
                 product.getContenido(),
                 product.getPresentacion(),
                 product.isActivo(),
-                product.getImageUrl());
+                product.getImageUrl(),
+                product.getPrecio(),
+                product.getCantidadDisponible());
     }
 }

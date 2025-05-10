@@ -59,16 +59,18 @@ public class IOXUtility {
         File file = new File(path);
         PrintWriter writer = new PrintWriter(file);
         for (Product product : products) {
-            String salida = product.getKey()+", " +
+            String salida = product.getKey() + ", " +
                     product.getNombre() + ", " +
-                    product.getMarca() +  ", " +
+                    product.getMarca() + ", " +
                     product.getDescripcion() + ", " +
                     product.getCategoria() + ", " +
-                    product.getUnidadMedida() +  ", " +
-                    product.getContenido() +  ", " +
+                    product.getUnidadMedida() + ", " +
+                    product.getContenido() + ", " +
                     product.getPresentacion() + ", " +
                     product.isActivo() + ", " +
-                    product.getImageUrl() +  ", ";
+                    product.getImageUrl() + ", " +
+                    product.getPrecio() + ", " +
+                    product.getCantidadDisponible();
             writer.println(salida);
             writer.flush();
         }
@@ -92,20 +94,27 @@ public class IOXUtility {
     private static Product getProducto(String line) {
         Product product = new Product();
         String[] items = line.split(",");
-        for(int i = 0; i < items.length; i++){
-            product.setCodigpBarras(items[0]);
-            product.setNombre(items[1]);
-            product.setMarca(items[2]);
-            product.setDescripcion(items[3]);
-            product.setCategoria(Category.valueOf(items[4].trim().toUpperCase()));
-            product.setUnidadMedida(items[5]);
-            product.setContenido(items[6]);
-            product.setPresentacion(items[7]);
-            product.setActivo(Boolean.parseBoolean(items[8]));
-            product.setImagenUrl(items[9]);
+        if (items.length < 11) {
+            System.out.println("Línea con formato incorrecto: " + line);
+            return product;
         }
+
+        product.setCodigpBarras(items[0].trim());
+        product.setNombre(items[1].trim());
+        product.setMarca(items[2].trim());
+        product.setDescripcion(items[3].trim());
+        product.setCategoria(Category.valueOf(items[4].trim().toUpperCase()));
+        product.setUnidadMedida(items[5].trim());
+        product.setContenido(items[6].trim());
+        product.setPresentacion(items[7].trim());
+        product.setActivo(Boolean.parseBoolean(items[8].trim()));
+        product.setImagenUrl(items[9].trim());
+        product.setPrecio(Double.parseDouble(items[10].trim()));
+        product.setCantidadDisponible(Integer.parseInt(items[11].trim()));
+
         return product;
     }
+
 
     public static void saveData(Map<String, Operable<? extends Keyable>> catalogs){
         catalogs.forEach((name, catalog) -> {

@@ -15,6 +15,24 @@ public class Product implements Displayable, Keyable {
     private boolean activo;
     private String descripcion;
     private String imagenUrl;
+    private double precio;
+    private int cantidadDisponible;
+
+    public double getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }
+
+    public int getCantidadDisponible() {
+        return cantidadDisponible;
+    }
+
+    public void setCantidadDisponible(int cantidadDisponible) {
+        this.cantidadDisponible = cantidadDisponible;
+    }
 
     public Product() {}
 
