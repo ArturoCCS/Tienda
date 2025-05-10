@@ -140,11 +140,8 @@
     -fx-background-color: linear-gradient(to left, rgba(255, 255, 255, 0) 97%, #267766 2%, #267766 2%) !important;
 }
 
-
-
 .nav-tab {
     -fx-font-size: 13px;
-
     -fx-padding: 10 10 10 10;
     -fx-background-color: #267766;
     -fx-background-radius: 10;
@@ -194,4 +191,19 @@
     -fx-font-family: "Segoe UI", sans-serif;
     -fx-background-radius: 8px;
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 8, 0.3, 0, 2);
+}
+
+.button-edit{
+    -fx-padding: 5 10;
+    -fx-background-color: #267766;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-border-color: transparent;
+    -fx-border-width: 2px;
+    -fx-cursor: hand;
+}
+
+.button-edit .glyph-icon{
+    -fx-font-size: 14px;
+    -fx-fill: white;
 }
