@@ -221,16 +221,20 @@ public class ViewProductController extends ViewOperable {
         getGrid().requestFocus();
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public CardDisplayable getController() {
-        return new CardProduct();
+        CardProduct newController = new CardProduct();
+        newController.setContext((List<Product>) getCatalog(),this);
+        return newController;
     }
 
 
-    @SuppressWarnings("unchecked")
     @Override
     public void insertAction(AnchorPane anchorPane, Displayable data) {
-        applyHoverAnimation(anchorPane);
+        if (getModo().equals("Venta")){
+            applyHoverAnimation(anchorPane);
+        }
         anchorPane.setOnMousePressed(e -> {
             anchorPane.setUserData(new double[]{e.getSceneX(), e.getSceneY()});
         });
@@ -244,9 +248,7 @@ public class ViewProductController extends ViewOperable {
 
             if (dx < movementThreshold && dy < movementThreshold) {
                 if (data instanceof Product product) {
-                    if (getModo().equals("Inventario")) {
-                        new PanelEditarProducto(product, (List<Product>) getCatalog(), this).mostrarVentana();
-                    } else if (getModo().equals("Venta")) {
+                   if (getModo().equals("Venta")) {
                         Object flag = anchorPane.getProperties().get("seleccionado");
                         if (flag != null && (boolean) flag) {
                             return;
@@ -267,13 +269,12 @@ public class ViewProductController extends ViewOperable {
 
         if(getModo().equals("Venta"))
             return;
-
-        Set<String> codigosResurtidos = resurtidos.stream()
-                .map(Keyable::getKey)
-                .collect(Collectors.toSet());
+        setModo("Venta");
 
         List<? extends Keyable> filteredData = getCatalog().stream()
-                .filter(p -> codigosResurtidos.contains(p.getKey()))
+                .filter(p -> p instanceof Product)
+                .map(p -> (Product) p)
+                .filter(Product::isActivo)
                 .collect(Collectors.toList());
 
         if (filteredData.isEmpty()) {
@@ -315,7 +316,6 @@ public class ViewProductController extends ViewOperable {
         );
         timeline.setOnFinished(e -> {
             AnchorPane.setRightAnchor(shoppingCart, 0.0);
-            setModo("Venta");
         });
 
         inventarioTab.getStyleClass().remove("selected");
@@ -329,6 +329,7 @@ public class ViewProductController extends ViewOperable {
     private void handleInventario(ActionEvent event) {
         if(getModo().equals("Inventario"))
             return;
+        setModo("Inventario");
 
         setCatalogFiltered(getCatalog());
         setupPagination(getCatalog());
@@ -352,7 +353,6 @@ public class ViewProductController extends ViewOperable {
         timeline.setOnFinished(e -> {
             agregarTab.setVisible(true);
             anchorPaneVenta.getChildren().clear();
-            setModo("Inventario");
         });
 
         ventaTab.getStyleClass().remove("selected");

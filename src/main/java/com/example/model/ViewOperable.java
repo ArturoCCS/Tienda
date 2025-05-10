@@ -284,7 +284,7 @@ public abstract class ViewOperable {
                 }
             }
 
-            cardController.action(data);
+            cardController.action(data, modo);
 
             anchorPane.setPrefWidth(cellWidth - 20);
             anchorPane.setMaxWidth(Double.MAX_VALUE);
